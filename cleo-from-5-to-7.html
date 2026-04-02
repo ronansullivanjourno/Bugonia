@@ -91,25 +91,27 @@
     margin-bottom: 40px; /* Increased this to push the giant headline down */
   }
 
-  .article-title {
+.article-title {
     font-size: 55px;
     font-weight: 900;
     letter-spacing: -3px;
-    line-height: 0.85;
+    line-height: 0.9; /* Slightly increased to prevent overlap */
     text-transform: uppercase;
     color: var(--black);
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     transform: scaleY(1.1);
     transform-origin: bottom left;
   }
 
   .article-meta {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 900;
     text-transform: uppercase;
+    color: var(--nosebleed-red); /* Using the pop color for the metadata */
+    border-top: 2px solid var(--black);
     border-bottom: 2px solid var(--black);
-    padding-bottom: 15px;
-    margin-bottom: 30px;
+    padding: 10px 0;
+    margin-bottom: 35px;
     display: flex;
     justify-content: space-between;
   }
@@ -153,7 +155,7 @@
 </head>
 <body>
 
-  <header class="global-header">
+<header class="global-header">
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="index.html?page=about&state=shifted">About</a>
@@ -162,9 +164,15 @@
     </nav>
   </header>
 
-  <main class="article-container">
-    <span class="article-tag">Posted on 1st Nov 2024 by Ronan Sullivan</span>
+ <main class="article-container">
     <h1 class="article-title">Cleo From 5 to 7 – Agnes Varda’s troubled bodies and Parisian cobblestones</h1>
+    
+    <div class="article-meta">
+      <span>Genre: Essay</span>
+      <span>Published: 1st Nov 2024</span>
+    </div>
+
+    <div class="article-body">
     
     <div class="article-meta">
       <span>By Ronan Sullivan</span>
