@@ -246,12 +246,12 @@
   }
 
   .nav-item:hover {
-    color: var(--pistachio); /* 🛠️ UPDATED: Hovering makes text go green */
+    color: var(--pistachio); 
     transform: scaleY(1.4) translateY(5px); 
   }
 
   .nav-item.active-nav {
-    color: var(--nosebleed-red); /* 🛠️ Stays red when active to match the page titles */
+    color: var(--nosebleed-red); 
     transform: scaleY(1.2);
     pointer-events: none; 
   }
@@ -317,9 +317,10 @@
     text-transform: uppercase;
     display: block;
     padding: 5px 0;
-    transition: transform 0.2s;
+    transition: transform 0.2s, color 0.2s; /* 🛠️ Added smooth color transition */
   }
   .editorial-link:hover { 
+    color: var(--pistachio); /* 🛠️ Linked hover color now fires off as green */
     transform: scaleY(1.3) translateX(5px);
     transform-origin: top;
   }
@@ -397,15 +398,15 @@
         </div>
         <div class="category-group">
           <span class="cat-label">Section 03</span>
-          <h3 class="cat-title">Columns</h3>
-          <a href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" class="editorial-link">'Acting Souljam...' →</a>
-          <a href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" class="editorial-link">'Fresh Year' →</a>
-        </div>
-        <div class="category-group">
-          <span class="cat-label">Section 04</span>
           <h3 class="cat-title">Book Critiques</h3>
           <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: My Brilliant Friend →</a>
           <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: Second Place →</a>
+        </div>
+        <div class="category-group">
+          <span class="cat-label">Section 04</span>
+          <h3 class="cat-title">Columns</h3>
+          <a href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" class="editorial-link">'Acting Souljam...' →</a>
+          <a href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" class="editorial-link">'Fresh Year' →</a>
         </div>
       </div>
     </div>
@@ -413,8 +414,8 @@
     <div class="section-content" id="page-contact">
       <div class="red-divider"></div>
       <div><h2 class="section-title">Contact</h2></div>
-      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">ronansullivan@hotmail.co.uk</a>
-      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">View LinkedIn Profile →</a>
+      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)'; this.style.transform='scaleY(1.3)';" onmouseout="this.style.color='var(--black)'; this.style.transform='scaleY(1)';">ronansullivan@hotmail.co.uk</a>
+      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)'; this.style.transform='scaleY(1.3)';" onmouseout="this.style.color='var(--black)'; this.style.transform='scaleY(1)';">View LinkedIn Profile →</a>
     </div>
 
   </div>
