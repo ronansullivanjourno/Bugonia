@@ -116,7 +116,7 @@
     margin-bottom: 30px;
   }
 
-  /* IMAGE BOXES */
+  /* IMAGE BOXES - UNSETTLING VISUAL FLIP */
   .essay-image-container {
     margin: 40px 0;
     border: 4px solid var(--black);
@@ -197,10 +197,17 @@
     line-height: 1.6;
   }
 
+  /* MASSIVE CLICKABLE REGION FOR READ NEXT */
   .read-next-container {
     border: 4px solid var(--black);
     padding: 30px;
     margin-bottom: 60px;
+    position: relative; /* Pins the clickable overlay area to this box */
+    transition: background-color 0.2s;
+  }
+
+  .read-next-container:hover {
+    background-color: rgba(13, 13, 13, 0.05); /* Slight fill on hover */
   }
 
   .read-next-label {
@@ -226,12 +233,18 @@
     color: var(--black);
     text-decoration: none;
     display: inline-block;
-    transition: transform 0.2s, color 0.2s;
   }
 
-  .read-next-link:hover {
+  /* THE MAGIC OVERLAY EFFECT */
+  .read-next-link::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    cursor: pointer;
+  }
+
+  .read-next-container:hover .read-next-link {
     color: var(--pistachio);
-    transform: translateX(5px);
   }
 
   /* MIRRORED HOMEPAGE NAVIGATION */
