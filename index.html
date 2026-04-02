@@ -156,7 +156,7 @@
     /* AGGRESSIVE DUOTONE VISUAL STYLE APPLICATION */
     filter: 
       grayscale(100%) /* 1. Convert to strict black & white */
-      contrast(250%)   /* 2. Heavy contrast push to make features pop */
+      contrast(220%)   /* 2. Heavy contrast push to make features pop */
       sepia(100%)      /* 3. Base wash for coloring */
       hue-rotate(-45deg) /* 4. Shift sepia toward Pistachio/Red axis */
       brightness(105%); /* 5. Subtle bright pop */
@@ -332,7 +332,7 @@
     <div class="geo-shard green-shard p5 drift-slow"></div>
 
     <div class="hero-drip-container">
-      <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.png');"></div>
+      <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
     </div>
 
     <div class="masthead">
@@ -399,15 +399,11 @@
       if (pageId === 'home') {
         canvas.classList.remove('shifted');
         document.getElementById('nav-home').classList.add('active-nav');
-        
-        // Return opacity to bold 0.72 on landing page
         document.documentElement.style.setProperty('--current-opacity', '0.72');
       } else {
         canvas.classList.add('shifted');
         document.getElementById('nav-' + pageId).classList.add('active-nav');
         document.getElementById('page-' + pageId).classList.add('active');
-        
-        // Fade the background shards down to 0.08 to make text highly readable
         document.documentElement.style.setProperty('--current-opacity', '0.08');
       }
     }
