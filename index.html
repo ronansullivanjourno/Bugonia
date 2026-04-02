@@ -11,9 +11,10 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-poster: #f2ebe1; /* Warm, raw poster stock */
+    --bg-poster: #eddcc4; /* Distressed, raw paper stock from the poster */
     --black: #0d0d0d;
-    --drip-color: #d14124; /* Deep, surreal resin red/orange */
+    --amber-drip: #f5a623; /* Molten honey / resin yellow */
+    --red-drip: #a32a14; /* Deep, viscous base liquid */
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
   }
@@ -29,68 +30,89 @@
     overflow: hidden;
   }
 
-  /* GRAIN OVERLAY */
+  /* INTENSE FILM GRAIN OVERLAY: To get that physical, gritty 35mm feel */
   body::before {
     content: '';
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.22;
+    opacity: 0.35;
     pointer-events: none;
     z-index: 50;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* CANVAS */
+  /* CANVAS (Maximized slightly for a louder presentation) */
   .canvas {
-    width: 90vw;
-    max-width: 1000px;
+    width: 92vw;
+    max-width: 1100px;
     height: 85vh;
     position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    background-color: var(--bg-poster);
+  }
+
+  /* THE BUGONIA RESIN DRIP (Framing your face/hero visual) */
+  .hero-drip {
+    grid-column: 4 / 10;
+    grid-row: 1 / 9;
+    background-color: var(--red-drip);
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+    
+    /* Creates the highly organic, melting shape of the poster */
+    clip-path: polygon(
+      30% 0%, 70% 0%, 95% 20%, 100% 50%, 85% 85%, 
+      65% 100%, 45% 90%, 25% 95%, 5% 70%, 0% 35%
+    );
+    transition: transform 1.2s var(--ease), clip-path 1.2s var(--ease);
+    position: relative;
+  }
+
+  /* Layering the "molten honey" color on top, mimicking poster design */
+  .hero-drip::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--amber-drip);
+    opacity: 0.55;
+    mix-blend-mode: color-burn;
+  }
+
+  /* AGGRESSIVE TITLES (Giant, compressed, overlapping) */
+  .masthead {
+    grid-column: 1 / 13;
+    grid-row: 8 / 13;
+    z-index: 15;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 40px;
-  }
-
-  /* THE SURREAL DRIP (Replacing the rigid grids) */
-  .fluid-drip {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background-color: var(--drip-color);
-    background-size: cover;
-    background-position: center;
-    /* This creates the organic, melting wave look */
-    clip-path: polygon(100% 0, 0 0, 0 80%, 15% 70%, 28% 85%, 45% 60%, 58% 90%, 75% 55%, 90% 80%, 100% 65%);
-    transition: transform 1.2s var(--ease);
-    z-index: 5;
-  }
-
-  /* MASTHEAD & TITLES */
-  .masthead {
-    z-index: 10;
+    padding-bottom: 20px;
   }
 
   .main-title {
-    font-size: 100px;
+    font-size: 140px;
     font-weight: 900;
-    letter-spacing: -5px;
-    line-height: 0.8;
+    letter-spacing: -10px;
+    line-height: 0.75;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 10px;
+    transform: scaleY(1.1); /* Custom slight stretch just like Lanthimos' posters */
+    transform-origin: bottom;
   }
 
   .main-nav {
     display: flex;
-    gap: 30px;
+    gap: 35px;
+    margin-left: 5px;
   }
 
   .nav-item {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
@@ -101,89 +123,90 @@
   }
   .nav-item:hover { opacity: 0.5; }
 
-  /* FULLSCREEN SUB-PAGES */
-  .fullscreen-content {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: var(--bg-poster);
-    z-index: 30;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
+  /* ORGANIC SECTIONS (No structured boxes anymore) */
+  .section-content {
+    grid-column: 2 / 12;
+    grid-row: 2 / 8;
+    z-index: 20;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.8s var(--ease);
+    transition: opacity 0.6s var(--ease);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  .fullscreen-content.active {
+  .section-content.active {
     opacity: 1;
     pointer-events: auto;
   }
 
-  .content-header {
-    grid-column: 2 / 12;
-    grid-row: 2 / 4;
-    font-size: 40px;
+  .section-title {
+    font-size: 55px;
     font-weight: 900;
     text-transform: uppercase;
-    border-bottom: 3px solid var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    letter-spacing: -1px;
+    letter-spacing: -3px;
+    margin-bottom: 20px;
   }
 
   .close-btn {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
     border: none;
     background: none;
+    margin-top: 20px;
+    align-self: flex-start;
   }
 
-  /* Retaining your writing categories */
-  .category-container {
-    grid-column: 2 / 12;
-    grid-row: 5 / 12;
+  /* Retaining your strictly requested writing data in a surrealist void */
+  .writing-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 40px;
   }
 
-  .category-box {
-    border-top: 2px solid var(--black);
-    padding-top: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 150px;
+  .category-group {
+    border-top: 3px solid var(--black);
+    padding-top: 10px;
   }
 
-  .cat-label { font-size: 11px; font-weight: 700; text-transform: uppercase; opacity: 0.5; }
-  .cat-title { font-size: 24px; font-weight: 900; text-transform: uppercase; }
+  .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
+  .cat-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 10px; }
   
   .editorial-link {
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 900;
     color: var(--black);
     text-decoration: none;
     text-transform: uppercase;
-    margin-top: auto;
     display: block;
+    margin-bottom: 5px;
     transition: opacity 0.2s;
   }
   .editorial-link:hover { opacity: 0.5; }
 
-  /* Subtle shift of the drip when a page is opened */
-  .canvas.displaced .fluid-drip {
-    transform: translateY(-20px) scaleY(0.95);
+  /* DYNAMIC CANVAS STATE: Morphing the shape when content opens */
+  .canvas.shifted .hero-drip {
+    transform: scale(0.6) translateX(150px);
+    clip-path: polygon(
+      10% 20%, 90% 0%, 100% 40%, 80% 90%, 50% 100%, 
+      20% 80%, 0% 50%, 5% 10%
+    );
     opacity: 0.3;
   }
 
+  .canvas.shifted .masthead {
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
   @media (max-width: 768px) {
-    .main-title { font-size: 55px; letter-spacing: -2px; }
-    .category-container { grid-template-columns: 1fr; overflow-y: auto; }
+    .main-title { font-size: 65px; letter-spacing: -3px; }
+    .hero-drip { grid-column: 3 / 11; grid-row: 2 / 7; }
+    .writing-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -191,7 +214,7 @@
 
   <div class="canvas" id="main-canvas">
     
-    <div class="fluid-drip" style="background-image: url('hero-visual.jpg');"></div>
+    <div class="hero-drip" style="background-image: url('hero-face.jpg');"></div>
 
     <div class="masthead">
       <h1 class="main-title">Ronan<br>Sullivan</h1>
@@ -202,92 +225,73 @@
       </nav>
     </div>
 
-  </div>
+    <div class="section-content" id="page-about">
+      <h2 class="section-title">About</h2>
+      <div style="font-size: 24px; font-weight: 900; line-height: 1.3; max-width: 650px; letter-spacing: -0.5px;">
+        I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing, bridging the gap between grassroots triumphs and professional artistry.
+      </div>
+      <button class="close-btn" onclick="closePage()">← [ Return ]</button>
+    </div>
 
-  <div class="fullscreen-content" id="page-about">
-    <div class="content-header">
-      <span>About</span>
-      <button class="close-btn" onclick="closePage()">[ Close ]</button>
-    </div>
-    <div style="grid-column: 2 / 8; grid-row: 5 / 11; font-size: 20px; line-height: 1.5; font-weight: 700;">
-      I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing, bridging the gap between grassroots triumphs and professional artistry.
-    </div>
-  </div>
-
-  <div class="fullscreen-content" id="page-writing">
-    <div class="content-header">
-      <span>Writing</span>
-      <button class="close-btn" onclick="closePage()">[ Close ]</button>
-    </div>
-    <div class="category-container">
+    <div class="section-content" id="page-writing">
+      <h2 class="section-title">Writing</h2>
       
-      <div class="category-box">
-        <div>
+      <div class="writing-grid">
+        <div class="category-group">
           <span class="cat-label">Section 01</span>
-          <h2 class="cat-title">Live Sports</h2>
+          <h3 class="cat-title">Live Sports</h3>
+          <a href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank" class="editorial-link">View Fenix Trophy Coverage →</a>
         </div>
-        <a href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank" class="editorial-link">View Fenix Trophy Coverage →</a>
-      </div>
 
-      <div class="category-box">
-        <div>
+        <div class="category-group">
           <span class="cat-label">Section 02</span>
-          <h2 class="cat-title">Theatre & Arts</h2>
-        </div>
-        <div>
+          <h3 class="cat-title">Theatre & Arts</h3>
           <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" class="editorial-link">The Motive and the Cue Review →</a>
-          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" class="editorial-link" style="margin-top: 5px;">Dancing at Lughnasa Review →</a>
+          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" class="editorial-link">Dancing at Lughnasa Review →</a>
         </div>
-      </div>
 
-      <div class="category-box">
-        <div>
+        <div class="category-group">
           <span class="cat-label">Section 03</span>
-          <h2 class="cat-title">Columns</h2>
-        </div>
-        <div>
+          <h3 class="cat-title">Columns</h3>
           <a href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" class="editorial-link">'Acting Souljam...' →</a>
-          <a href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" class="editorial-link" style="margin-top: 5px;">'Fresh Year' →</a>
+          <a href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" class="editorial-link">'Fresh Year' →</a>
         </div>
-      </div>
 
-      <div class="category-box">
-        <div>
+        <div class="category-group">
           <span class="cat-label">Section 04</span>
-          <h2 class="cat-title">Book Critiques</h2>
-        </div>
-        <div>
+          <h3 class="cat-title">Book Critiques</h3>
           <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: My Brilliant Friend →</a>
-          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link" style="margin-top: 5px;">Review: Second Place →</a>
+          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: Second Place →</a>
         </div>
       </div>
 
+      <button class="close-btn" onclick="closePage()">← [ Return ]</button>
     </div>
-  </div>
 
-  <div class="fullscreen-content" id="page-contact">
-    <div class="content-header">
-      <span>Contact</span>
-      <button class="close-btn" onclick="closePage()">[ Close ]</button>
+    <div class="section-content" id="page-contact">
+      <h2 class="section-title">Contact</h2>
+      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px;">ronansullivan@hotmail.co.uk</a>
+      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none;">View LinkedIn Profile →</a>
+      
+      <button class="close-btn" onclick="closePage()">← [ Return ]</button>
     </div>
-    <div style="grid-column: 2 / 10; grid-row: 5 / 11;">
-      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 30px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 10px;">ronansullivan@hotmail.co.uk</a>
-      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 700; color: var(--black); text-decoration: none;">View LinkedIn Profile →</a>
-    </div>
+
   </div>
 
   <script>
     function openPage(pageId) {
-      document.getElementById('main-canvas').classList.add('displaced');
+      document.getElementById('main-canvas').classList.add('shifted');
+      
       setTimeout(() => {
         document.getElementById('page-' + pageId).classList.add('active');
-      }, 300);
+      }, 400);
     }
 
     function closePage() {
-      document.querySelectorAll('.fullscreen-content').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.section-content').forEach(p => p.classList.remove('active'));
+      
       setTimeout(() => {
-        document.getElementById('main-canvas').classList.remove('displaced');
+        document.getElementById('main-canvas').classList.remove('shifted');
       }, 300);
     }
   </script>
