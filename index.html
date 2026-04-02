@@ -32,12 +32,12 @@
     overflow: hidden; 
   }
 
-  /* NOISE OVERLAY: RESTORED */
+  /* NOISE OVERLAY */
   body::before { 
     content: ''; 
     position: fixed; 
     top: 0; left: 0; width: 100%; height: 100%; 
-    opacity: 0.5; /* Full intensity restored */
+    opacity: 0.5; 
     pointer-events: none; 
     z-index: 50; 
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); 
@@ -58,10 +58,7 @@
     z-index: 100;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 25px;
-  }
+  .nav-links { display: flex; gap: 25px; }
 
   .nav-links button {
     font-size: 12px;
@@ -80,7 +77,7 @@
   .nav-links button.active { color: var(--nosebleed-red); }
 
   /* ==========================================
-     ARTISTIC CANVAS (HARD-GRID ENABLED)
+     ARTISTIC CANVAS
      ========================================== */
   .canvas { 
     width: 96vw; 
@@ -96,7 +93,7 @@
     margin-top: 5px;
   }
 
-  /* Hard-grid raw layout vertical line */
+  /* Fixed vertical division line */
   .canvas::before {
     content: '';
     position: absolute;
@@ -108,7 +105,6 @@
     z-index: 5;
   }
 
-  /* Gradient Sheen Overlay */
   .canvas::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%); opacity: 0.12; mix-blend-mode: multiply; }
   
   /* SHARDS */
@@ -119,7 +115,8 @@
   .drift-slow { animation: driftLeft 30s linear infinite, spinShard 35s linear infinite reverse; }
   
   .p1 { width: 120px; height: 100px; top: 15%; left: 5%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); }
-  .p2 { width: 60px; height: 60px; top: 40%; left: 25%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); }
+  /* P2 MOVED AWAY FROM HERO IMAGE BOUNDARIES */
+  .p2 { width: 60px; height: 60px; top: 60%; left: 15%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); }
   
   @keyframes driftRight { 0% { transform: translateX(-200px); } 100% { transform: translateX(calc(96vw + 200px)); } }
   @keyframes driftLeft { 0% { transform: translateX(calc(96vw + 200px)); } 100% { transform: translateX(-200px); } }
@@ -133,24 +130,23 @@
   .hero-drip { 
     width: 100%; 
     height: 100%; 
-    background-color: var(--nosebleed-red); 
-    opacity: var(--current-opacity); /* Full opacity fade restored */
+    background-color: var(--black); 
+    opacity: var(--current-opacity); 
     background-size: 150%; 
     background-position: 30% 65%; 
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); 
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
     pointer-events: auto; 
     cursor: default;
-    /* FILMIC SHEEN: RESTORED INTENSE EFFECT */
-    filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); 
+    /* FILMIC SHEEN: TRUE HARD GRAYSCALE DUOTONE */
+    filter: grayscale(100%) contrast(160%) brightness(100%); 
   }
   
-  /* MOVEMENT REMOVED FROM HOVER STATE */
   .hero-drip:hover { transform: none; }
   
   .masthead { grid-column: 1 / 9; grid-row: 9 / 13; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; pointer-events: none; }
   
-  /* MASTHEAD LINKS */
+  /* MASTHEAD LINKS (NO PISTACHIO HOVER) */
   .main-title { 
     font-size: 100px; 
     font-weight: 900; 
@@ -161,14 +157,14 @@
     margin-bottom: 5px; 
     transform: scaleY(1.15); 
     transform-origin: bottom; 
-    transition: opacity 0.6s var(--ease), color 0.3s ease; 
+    transition: opacity 0.6s var(--ease), transform 0.3s ease; 
     pointer-events: auto; 
     cursor: pointer;
     text-decoration: none;
     display: inline-block; 
   }
   
-  .main-title:hover { color: var(--pistachio); }
+  .main-title:hover { color: var(--black); transform: scaleY(1.2); }
   
   .sub-title { 
     font-size: 28px; 
@@ -178,36 +174,38 @@
     color: var(--nosebleed-red); 
     transform: scaleY(1.1); 
     transform-origin: bottom; 
-    transition: opacity 0.6s var(--ease), color 0.3s ease; 
+    transition: opacity 0.6s var(--ease), transform 0.3s ease; 
     pointer-events: auto; 
     cursor: pointer;
     text-decoration: none;
     display: inline-block; 
   }
   
-  .sub-title:hover { color: var(--pistachio); }
+  .sub-title:hover { color: var(--nosebleed-red); transform: scaleY(1.15); }
   
   /* ==========================================
-     FEATURED STORY BOX (STANDARDIZED UX HEIGHT)
+     FEATURED STORY BOX (TOP RIGHT FLOATING)
      ========================================== */
   .featured-story-box {
     grid-column: 9 / 13;
-    /* Standardized fixed height to eliminate dead space. */
-    grid-row: 2 / 12; 
+    /* Framed nicely to only drop down 3/4 of the layout */
+    grid-row: 2 / 10; 
     z-index: 30;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-    border-bottom: 4px solid var(--black); /* Standardizes the height and frames it */
-    overflow: hidden; /* Keeps previews perfectly contained */
+    border: 3px solid var(--black); 
+    background-color: var(--bg-poster);
+    margin: 10px;
+    overflow-y: auto; 
   }
 
   .featured-story-box .story-image {
     width: 100%;
-    height: 180px;
-    background-color: var(--nosebleed-red);
+    height: 160px;
+    background-color: var(--black);
     background-size: cover;
     background-position: center;
     border: 2px solid var(--black);
@@ -216,9 +214,7 @@
     transition: filter 0.3s ease;
   }
   
-  .featured-story-box:hover .story-image {
-    filter: grayscale(0%) contrast(100%);
-  }
+  .featured-story-box:hover .story-image { filter: grayscale(0%) contrast(100%); }
 
   .featured-story-box .story-label {
     font-size: 11px;
@@ -230,7 +226,7 @@
   }
 
   .featured-story-box .story-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -0.5px;
@@ -239,13 +235,12 @@
     margin-bottom: 10px;
   }
 
-  .featured-story-box .story-preview {
+  .featured-story-box .story-preview p {
     font-size: 13px;
     font-weight: 400;
     line-height: 1.4;
     color: var(--black);
-    opacity: 1; /* Darker, high-contrast text */
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
 
   .featured-story-box .story-link {
@@ -256,13 +251,11 @@
     text-transform: uppercase;
     align-self: flex-start;
     transition: transform 0.2s, color 0.2s;
-    margin-top: auto; /* Buttons are now pushed to the solid bottom boundary */
+    margin-top: auto; 
+    padding-top: 10px;
   }
 
-  .featured-story-box .story-link:hover {
-    color: var(--pistachio);
-    transform: scaleY(1.2) translateX(3px);
-  }
+  .featured-story-box .story-link:hover { color: var(--pistachio); transform: scaleY(1.2) translateX(3px); }
 
   .canvas.shifted .featured-story-box { opacity: 0; pointer-events: none; transform: translateY(20px); }
 
@@ -322,7 +315,7 @@
       <div>
         <span id="featured-label" class="story-label">Lead Story</span>
         <h3 id="featured-title" class="story-title">...</h3>
-        <p id="featured-preview" class="story-preview">...</p>
+        <div id="featured-preview" class="story-preview"></div>
       </div>
       <a id="featured-link" href="#" target="_blank" class="story-link">Read Full Report →</a>
     </div>
@@ -364,12 +357,12 @@
   </div>
 
   <script>
-    // 1. POOL OF ARTICLES (precisely mapped to your uploaded filenames)
+    // 1. POOL OF ARTICLES
     const featuredArticles = [
       {
         label: "Sports Report",
         title: "Win over Welsh side secures Fenix Trophy play-off place",
-        preview: "Enfield Town took a huge step towards securing their place in the Fenix Trophy play-offs after a hard-fought victory over Welsh side Llantwit Major. A goal in each half proved the difference in a match of high intensity and grit. The win effectively mathematical certainty for the final tournament, marking a major milestone in Enfield Town's historic European debut campaign. Manager and players alike praised the vocal home support that provided the extra edge needed.",
+        preview: "Enfield Town took a huge step towards securing their place in the Fenix Trophy play-offs after a hard-fought victory over Welsh side Llantwit Major. A goal in each half proved the difference in a match of high intensity and grit.\n\nThe win effectively mathematically secured the final tournament, marking a major milestone in Enfield Town's historic European debut campaign. Manager and players alike praised the vocal home support that provided the extra edge needed.",
         image: "WhatsApp Image 2026-04-02 at 16.24.27.jpeg", 
         link: "https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/",
         cta: "Read Full Report →"
@@ -377,7 +370,7 @@
       {
         label: "Arts Column",
         title: "Dissecting the French New Wave: Cléo from 5 to 7",
-        preview: "Agnès Varda's masterful exploration of existential dread and the female gaze remains as sharp and visually striking today as it did in 1962. We follow Cléo, a pop singer, across Paris in real-time as she awaits the results of a biopsy. Our essay argues that Varda systematically deconstructs the objective male view of women, replacing it with Cléo's internal, transformative experience of the city itself—a profound shift from object to subject that defined a generation.",
+        preview: "Agnès Varda's masterful exploration of existential dread and the female gaze remains as sharp and visually striking today as it did in 1962. We follow Cléo, a pop singer, across Paris in real-time as she awaits the results of a biopsy.\n\nOur essay argues that Varda systematically deconstructs the objective male view of women, replacing it with Cléo's internal, transformative experience of the city itself—a profound shift from object to subject that defined a generation.",
         image: "Cleo From 5 to 7.jpg", 
         link: "cleo-from-5-to-7.html",
         cta: "Read Essay →"
@@ -385,7 +378,7 @@
       {
         label: "Book Critique",
         title: "A Masterpiece of Dystopian Fiction: Prophet Song",
-        preview: "Paul Lynch's Booker Prize winner captures a chillingly claustrophobic vision of a society collapsing under authoritarian drift. The narrative follows Eilish Stack, a mother of four, trying to maintain normalcy as her Dublin neighborhood is consumed by emergency powers and state paranoia. It is a terrifyingly plausible look at how quickly liberty can be bartered for 'security', and how ordinary citizens must confront impossible moral choices when law itself becomes the weapon of oppression.",
+        preview: "Paul Lynch's Booker Prize winner captures a chillingly claustrophobic vision of a society collapsing under authoritarian drift. The narrative follows Eilish Stack, a mother of four, trying to maintain normalcy as her Dublin neighborhood is consumed by emergency powers.\n\nIt is a terrifyingly plausible look at how quickly liberty can be bartered for 'security', and how ordinary citizens must confront impossible moral choices when law itself becomes the weapon of oppression.",
         image: "Prophet Song Book.jpg", 
         link: "prophet-song.html",
         cta: "Read Analysis →"
@@ -398,7 +391,17 @@
       
       document.getElementById('featured-label').textContent = chosen.label;
       document.getElementById('featured-title').textContent = chosen.title;
-      document.getElementById('featured-preview').textContent = chosen.preview;
+      
+      // Clear previous and split text by line breaks into paragraphs
+      const previewContainer = document.getElementById('featured-preview');
+      previewContainer.innerHTML = '';
+      const paragraphs = chosen.preview.split('\n\n');
+      paragraphs.forEach(text => {
+        const p = document.createElement('p');
+        p.textContent = text;
+        previewContainer.appendChild(p);
+      });
+
       document.getElementById('featured-link').href = chosen.link;
       document.getElementById('featured-link').textContent = chosen.cta;
       document.getElementById('featured-img').style.backgroundImage = `url('${chosen.image}')`;
