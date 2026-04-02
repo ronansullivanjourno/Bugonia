@@ -117,18 +117,19 @@
   @keyframes floatingPrimary { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
   
   /* FIXED IMAGE POSITION: Uses 'cover' to scale perfectly and nudges the crop down by 20% */
-  .hero-drip { 
+ .hero-drip { 
     width: 100%; 
     height: 100%; 
     background-color: var(--nosebleed-red); 
     opacity: var(--current-opacity); 
     background-size: 150%;
-    background-position: 30%;
+    background-position: 30% 15%; /* 30% pulls right, 15% pulls your face UP */
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); 
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
     pointer-events: auto; 
     cursor: pointer; 
     filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); 
+ }
   }
   
   .hero-drip:hover { transform: scale(1.05) rotate(-2deg); }
