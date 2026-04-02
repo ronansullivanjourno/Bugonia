@@ -146,10 +146,10 @@
     background-color: var(--nosebleed-red);
     opacity: var(--current-opacity);
     
-    /* 1. SCALE UP TO 170% TO ZOOM IN ON YOU AND CUT OUT BACKGROUND TREES */
-    background-size: 170%;
-    /* 2. PIN TO THE BOTTOM CENTER TO CAPTURE YOUR FACE AND WATCH */
-    background-position: 50% 100%; 
+    /* 1. SCALE DOWN TO 130% (FROM 170%) TO STOP CUTTING YOUR HEAD */
+    background-size: 130%;
+    /* 2. RE-POSITION TO FOCUS ON FACE & PREVENT TOP CLIPPING */
+    background-position: 50% 92%; 
     
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%);
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
