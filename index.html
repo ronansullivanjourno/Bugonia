@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ronan Sullivan — Portfolio</title>
+<title>Colin From Accounts Season 2 — Ronan Sullivan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -11,15 +11,12 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-poster: #bcc6cc; /* Cold, clinical glaucous blue-gray */
+    --bg-poster: #bcc6cc; 
     --black: #0d0d0d;
-    --pistachio: #5b6e56; /* Cinematic, deep slate-green */
-    --nosebleed-red: #7c2230; /* Cinematic deep red */
+    --pistachio: #5b6e56; 
+    --nosebleed-red: #7c2230; 
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
-    
-    /* Dynamic opacity variables controlled via JS */
-    --current-opacity: 0.72; 
   }
 
   body {
@@ -29,8 +26,7 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   /* INTENSE FILM GRAIN OVERLAY */
@@ -44,413 +40,227 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* CANVAS */
-  .canvas {
+  /* CONTAINER FOR THE ESSAY */
+  .article-container {
     width: 96vw;
-    max-width: 1400px;
-    height: 92vh;
+    max-width: 800px;
+    padding: 80px 20px;
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    background-color: var(--bg-poster);
-    overflow: hidden; 
-  }
-
-  /* ATMOSPHERIC DUO-TONE BLEED */
-  .canvas::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 2;
-    background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%);
-    opacity: 0.18;
-    mix-blend-mode: multiply;
-  }
-
-  /* NON-UNIFORM ANGULAR FLOATING SHARDS */
-  .geo-shard {
-    position: absolute;
-    opacity: var(--current-opacity);
-    z-index: 1;
-    pointer-events: none;
-    transition: opacity 1.2s var(--ease);
-  }
-
-  .green-shard { background-color: var(--pistachio); }
-  .red-shard { background-color: var(--nosebleed-red); }
-
-  /* Continuous non-uniform rotation and drifting */
-  .drift-fast { animation: driftRight 18s linear infinite, spinShard 20s linear infinite; }
-  .drift-slow { animation: driftLeft 30s linear infinite, spinShard 35s linear infinite reverse; }
-
-  /* Pure CSS Polygons for highly non-uniform shapes */
-  .p1 { 
-    width: 120px; height: 100px; top: 10%; left: 5%; 
-    clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%);
-  }
-  .p2 { 
-    width: 60px; height: 60px; top: 35%; left: 25%; 
-    clip-path: polygon(50% 0%, 100% 100%, 0% 60%);
-  }
-  .p3 { 
-    width: 150px; height: 130px; top: 65%; left: 45%; 
-    clip-path: polygon(0 0, 100% 30%, 85% 100%, 10% 85%);
-  }
-  .p4 { 
-    width: 40px; height: 50px; top: 75%; left: 80%; 
-    clip-path: polygon(10% 10%, 90% 20%, 100% 90%, 20% 100%);
-  }
-  .p5 { 
-    width: 180px; height: 140px; top: 5%; left: 75%; 
-    clip-path: polygon(30% 0%, 90% 10%, 100% 70%, 0% 100%);
-  }
-
-  @keyframes driftRight {
-    0% { transform: translateX(-200px); }
-    100% { transform: translateX(calc(96vw + 200px)); }
-  }
-
-  @keyframes driftLeft {
-    0% { transform: translateX(calc(96vw + 200px)); }
-    100% { transform: translateX(-200px); }
-  }
-
-  @keyframes spinShard {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  /* THE PRIMARY SPECIMEN SHAPE */
-  .hero-drip-container {
-    grid-column: 6 / 10;
-    grid-row: 2 / 7;
     z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    animation: floatingPrimary 8s ease-in-out infinite;
   }
 
-  @keyframes floatingPrimary {
-    0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(3deg); }
-    100% { transform: translateY(0px) rotate(0deg); }
+  .back-btn {
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    transition: transform 0.2s, color 0.2s;
+  }
+  .back-btn:hover {
+    color: var(--pistachio);
+    transform: scaleY(1.2) translateX(-5px);
   }
 
-  .hero-drip {
-    width: 100%;
-    height: 100%;
-    background-color: var(--nosebleed-red);
-    opacity: var(--current-opacity);
-    background-size: 130%;
-    background-position: 50% 92%; 
-    clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%);
-    transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
-    pointer-events: auto;
-    cursor: pointer;
-    filter: 
-      grayscale(100%) 
-      contrast(215%)    
-      sepia(100%)      
-      hue-rotate(-42deg) 
-      brightness(104%);  
-  }
-
-  .hero-drip:hover {
-    transform: scale(1.05) rotate(-2deg);
-  }
-
-  /* OVERLAY FOR UNSETTLING BLEND */
-  .hero-drip::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: var(--pistachio);
-    opacity: 0.15;
-    mix-blend-mode: color-burn;
-  }
-  
-  .hero-drip::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1;
-    background-color: var(--nosebleed-red);
-    opacity: 0.22;
-    mix-blend-mode: overlay;
-  }
-
-  /* TITLES & NAV */
-  .masthead {
-    grid-column: 1 / 13;
-    grid-row: 7 / 13;
-    z-index: 30; 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 20px;
-    pointer-events: none; 
+  header {
+    margin-bottom: 40px;
   }
 
   .main-title {
-    font-size: 110px;
+    font-size: 65px;
     font-weight: 900;
-    letter-spacing: -7px;
-    line-height: 0.75;
+    letter-spacing: -4px;
+    line-height: 0.85;
     text-transform: uppercase;
     color: var(--black);
-    margin-bottom: 5px;
-    transform: scaleY(1.15);
+    margin-bottom: 15px;
+    transform: scaleY(1.1);
     transform-origin: bottom;
-    transition: opacity 0.6s var(--ease);
-    pointer-events: auto; 
-    display: inline-block;
   }
 
   .sub-title {
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: -1px;
-    color: var(--nosebleed-red);
-    margin-bottom: 20px;
-    transform: scaleY(1.1);
-    transform-origin: bottom;
-    transition: opacity 0.6s var(--ease);
-    pointer-events: auto;
-    display: inline-block;
-  }
-
-  .main-nav {
-    display: flex;
-    gap: 15px; 
-    margin-left: -10px; 
-  }
-
-  .nav-item {
-    font-size: 15px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: var(--black);
-    padding: 20px 15px; 
-    pointer-events: auto; 
-    transition: opacity 0.3s, transform 0.3s var(--ease), color 0.3s;
-    display: inline-block;
-  }
-
-  .nav-item:hover {
-    color: var(--pistachio); 
-    transform: scaleY(1.4) translateY(5px); 
-  }
-
-  .nav-item.active-nav {
-    color: var(--nosebleed-red); 
-    transform: scaleY(1.2);
-    pointer-events: none; 
-  }
-
-  /* SECTIONS */
-  .section-content {
-    grid-column: 2 / 12;
-    grid-row: 2 / 7;
-    z-index: 20;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.6s var(--ease);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .section-content.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .section-title {
-    font-size: 55px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -3px;
-    margin-bottom: 20px;
-    transform: scaleY(1.1);
-    transform-origin: left;
+    letter-spacing: -0.5px;
     color: var(--nosebleed-red);
     display: inline-block;
   }
 
-  /* WRITING GRID */
-  .writing-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-
-  .category-group {
+  .meta-divider {
     border-top: 4px solid var(--nosebleed-red);
-    padding-top: 10px;
+    margin: 30px 0;
   }
 
-  .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
-  
-  .cat-title { 
-    font-size: 24px; 
-    font-weight: 900; 
-    text-transform: uppercase; 
-    letter-spacing: -1px; 
-    margin-bottom: 10px; 
-    color: var(--black); 
-  }
-  
-  .editorial-link {
-    font-size: 13px;
+  .byline-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
     font-weight: 900;
-    color: var(--black);
-    text-decoration: none;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--black);
+  }
+
+  .article-body {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: justify;
+  }
+
+  .article-body p {
+    margin-bottom: 30px;
+  }
+
+  /* IMAGE BOXES */
+  .essay-image-container {
+    margin: 40px 0;
+    border: 4px solid var(--black);
+    background-color: var(--black);
+    position: relative;
+  }
+
+  .essay-image-container img {
+    width: 100%;
+    height: auto;
     display: block;
-    padding: 5px 0;
-    transition: transform 0.2s, color 0.2s;
-  }
-  .editorial-link:hover { 
-    color: var(--pistachio); 
-    transform: scaleY(1.3) translateX(5px);
-    transform-origin: top;
+    filter: grayscale(100%) contrast(110%);
+    transition: filter 0.3s;
   }
 
-  /* DYNAMIC CANVAS STATE */
-  .canvas.shifted .hero-drip {
-    transform: scale(0.5) translateY(140px) translateX(300px);
+  .essay-image-container img:hover {
+    filter: grayscale(0%) contrast(100%);
   }
 
-  .canvas.shifted .main-title,
-  .canvas.shifted .sub-title {
-    opacity: 0.03;
+  .image-caption {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--bg-poster);
+    background-color: var(--black);
+    padding: 12px;
+    text-align: center;
+    line-height: 1.4;
   }
-  
-  .red-divider {
-    border-top: 4px solid var(--nosebleed-red);
-    margin-bottom: 20px;
+
+  /* BLOCKQUOTE FOR HEAVY EMPHASIS */
+  blockquote {
+    border-left: 4px solid var(--nosebleed-red);
+    padding-left: 20px;
+    margin: 30px 0;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
   }
 
   @media (max-width: 768px) {
-    .main-title { font-size: 55px; letter-spacing: -2px; }
-    .sub-title { font-size: 22px; }
-    .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 6; }
-    .writing-grid { grid-template-columns: 1fr; }
-    .canvas { width: 96vw; height: 92vh; } 
+    .main-title { font-size: 40px; letter-spacing: -2px; }
+    .article-container { padding: 40px 15px; }
+    .byline-container { flex-direction: column; gap: 5px; }
   }
 </style>
 </head>
 <body>
 
-  <div class="canvas" id="main-canvas">
-    
-    <div class="geo-shard green-shard p1 drift-fast"></div>
-    <div class="geo-shard red-shard p2 drift-slow"></div>
-    <div class="geo-shard green-shard p3 drift-slow"></div>
-    <div class="geo-shard red-shard p4 drift-fast"></div>
-    <div class="geo-shard green-shard p5 drift-slow"></div>
+  <div class="article-container">
+    <a href="index.html" class="back-btn" onclick="goToWriting()">← Back to Portfolio</a>
 
-    <div class="hero-drip-container">
-      <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
-    </div>
-
-    <div class="masthead">
-      <div><h1 class="main-title">Ronan<br>Sullivan</h1></div>
-      <div><h2 class="sub-title">Portfolio</h2></div>
-      <nav class="main-nav">
-        <button class="nav-item" id="nav-home" onclick="openPage('home')">Home</button>
-        <button class="nav-item" id="nav-about" onclick="openPage('about')">About</button>
-        <button class="nav-item" id="nav-writing" onclick="openPage('writing')">Writing</button>
-        <button class="nav-item" id="nav-contact" onclick="openPage('contact')">Contact</button>
-      </nav>
-    </div>
-
-    <div class="section-content" id="page-about">
-      <div class="red-divider"></div>
-      <div><h2 class="section-title">About</h2></div>
-      <div style="font-size: 24px; font-weight: 900; line-height: 1.3; max-width: 650px; letter-spacing: -0.5px;">
-        I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing, bridging the gap between grassroots triumphs and professional artistry.
+    <header>
+      <h1 class="main-title">Colin From Accounts</h1>
+      <h2 class="sub-title">This Aussie dog-com continues to bark up the right tree</h2>
+      <div class="meta-divider"></div>
+      <div class="byline-container">
+        <span>By Ronan Sullivan</span>
+        <span>Published 25th Sep 2024</span>
       </div>
-    </div>
+    </header>
 
-    <div class="section-content" id="page-writing">
-      <div><h2 class="section-title">Writing</h2></div>
-      <div class="writing-grid">
-        <div class="category-group">
-          <span class="cat-label">Section 01</span>
-          <h3 class="cat-title">Live Sports</h3>
-          <a href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank" class="editorial-link">View Fenix Trophy Coverage →</a>
-        </div>
-        
-        <div class="category-group">
-          <span class="cat-label">Section 02</span>
-          <h3 class="cat-title">Arts & Film</h3>
-          <a href="cleo-from-5-to-7.html" class="editorial-link">Essay: Cléo from 5 to 7 →</a>
-          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" class="editorial-link">The Motive and the Cue Review →</a>
-          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" class="editorial-link">Dancing at Lughnasa Review →</a>
-        </div>
+    <div class="article-body">
+      
+      <p>
+        <strong>Real-life couple Harriet Dyer and Patrick Brammall’s second season of their dog-centric comedy hits even greater heights.</strong>
+      </p>
 
-        <div class="category-group">
-          <span class="cat-label">Section 03</span>
-          <h3 class="cat-title">Book Critiques</h3>
-          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: My Brilliant Friend →</a>
-          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: Second Place →</a>
-        </div>
+      <p>
+        Colin From Accounts Season 2 is – simply put – very, very good. The emotional peaks felt greater than the first season and creators Harriet Dyer and Patrick Brammall are really getting into the nitty-gritty of their relationship and of both Ash and Gordon as people.
+      </p>
 
-        <div class="category-group">
-          <span class="cat-label">Section 04</span>
-          <h3 class="cat-title">Columns</h3>
-          <a href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" class="editorial-link">'Acting Souljam...' →</a>
-          <a href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" class="editorial-link">'Fresh Year' →</a>
-        </div>
+      <p>
+        Following from the season one finale, where the couple lost their furry friend, Colin, to The Insufferable Family, Ash and Gordon are still trying desperately to get Colin (now Peppy) back: luring him at the park with treats, or entering into a contract with the brusque and horrid former owner of Colin himself to finagle their boy back.
+      </p>
+
+      <p>
+        This task propels the series forward through its first couple of episodes, before we begin to delve into the issues this new couple are facing as the pet ownership plotline is resolved.
+      </p>
+
+      <p>
+        Meggles (Emma Harvie) and Ciara’s (Genevieve Hegney) relationship is still in its opening stage, with Ciara’s homelife as yet unresolved, while Brett recruits Justin the Justice to aid him in his parents’ attempts to evict him.
+      </p>
+
+      <p>
+        Further spanners in the work like the unexpected visit of Gordon’s “shit-stirring” brother, Alistair, or, “Heavy” (nicknamed as such because of the -stair in Alistair and Led Zeppelin’s ‘Stairway to Heaven’); the potential foreclosure of Gordon’s brewery because of giant Asian conglomerates, and the Yvette the Vet’s shocking, life-altering news for Gordon.
+      </p>
+
+      <p>
+        The parade of insufferable characters continues in earnest: a laddish businessman offering to buy Gordon’s brewery (played by Aunty Donna’s Broden Kelly); Rumi, a pretentious new partner of a friend pushed onto Ash and Gordon at a double date, and the smug Yvette the Vet – are all perfect characters to both laugh at and be infuriated by in equal measure.
+      </p>
+
+      <div class="essay-image-container">
+        <img src="colin-from-accounts-cast.jpg" alt="Cast of Colin From Accounts">
+        <div class="image-caption">Harriet Dyer and Patrick Brammall leading a retinue of laser-sharp comedic observations</div>
       </div>
-    </div>
 
-    <div class="section-content" id="page-contact">
-      <div class="red-divider"></div>
-      <div><h2 class="section-title">Contact</h2></div>
-      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)'; this.style.transform='scaleY(1.3)';" onmouseout="this.style.color='var(--black)'; this.style.transform='scaleY(1)';">ronansullivan@hotmail.co.uk</a>
-      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)'; this.style.transform='scaleY(1.3)';" onmouseout="this.style.color='var(--black)'; this.style.transform='scaleY(1)';">View LinkedIn Profile →</a>
-    </div>
+      <blockquote>
+        They are all the worst people we have had the misfortune of running into at those inescapable social occasions.
+      </blockquote>
 
+      <p>
+        The two leads are as deft in their portrayals as ever: Dyer’s performance as Ash and her series of constantly pained and harrumphing expressions, sighs, and general demeanour is still so enjoyable and nuanced.
+      </p>
+
+      <p>
+        Her constant exasperation at dealing with her airheaded and misguided mother Lynelle (Helen Thomson), and the perverse little rat that is her partner Professor Lee (Darren Gilshenan), is as understandable as ever.
+      </p>
+
+      <p>
+        Lynelle forms the anti-misandrist, wonderfully named WAWAM (Women Against Women Against Men); Dyer and Brammall’s skewering of small-minded conservative culture is clearly as sharp as ever.
+      </p>
+
+      <p>
+        And Ash and Gordon both end up running into blind alleys when it comes to their own “PC-ness”, assuming pronouns and getting in their own way; their encounter of Rumi is a particularly good example of this, and how annoying and self-centred people pop up in every corner of the political spectrum.
+      </p>
+
+      <p>
+        Gordon, in these contexts, is so fun to watch as his exasperation and confusion with the manners and humour of the world around him fails to match up to his expectations.
+      </p>
+
+      <p>
+        A particular highlight of the series is episode five: from Ash and Gordon’s separate perspectives on a night when Gordon’s special brisket for the two is ruined when Ash goes missing after leaving work, as we follow their separate, ill-fated nights to find each other.
+      </p>
+
+      <p>
+        From iPad toddlers in hospital wards, costumed bacchanalia, and the gammon-faced jowls of parents who refuse to speak unless basted in the sardonic and bitter, Dyer and Brammall’s Colin From Accounts maintains its retinue of laser-sharp comedic observations, mixed in with heartfelt and moving looks at modern relationships, with all its corollary foibles, disputes, and expressing of a disabled dog’s anus.
+      </p>
+
+      <p>
+        My only critique is that it is so short – and that Season 3 is not already here. Two critiques, then.
+      </p>
+
+    </div>
   </div>
 
   <script>
-    function openPage(pageId) {
-      document.querySelectorAll('.section-content').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-nav'));
-      
-      const canvas = document.getElementById('main-canvas');
-
-      if (pageId === 'home') {
-        canvas.classList.remove('shifted');
-        document.getElementById('nav-home').classList.add('active-nav');
-        document.documentElement.style.setProperty('--current-opacity', '0.72');
-      } else {
-        canvas.classList.add('shifted');
-        document.getElementById('nav-' + pageId).classList.add('active-nav');
-        document.getElementById('page-' + pageId).classList.add('active');
-        document.documentElement.style.setProperty('--current-opacity', '0.08');
-      }
-    }
-
-    // 🛠️ State tracker so pushing "back" takes the viewer back to the open Writing state
-    const savedPage = localStorage.getItem('openPage');
-    if (savedPage) {
-      openPage(savedPage);
-      localStorage.removeItem('openPage'); 
-    } else {
-      document.getElementById('nav-home').classList.add('active-nav');
+    function goToWriting() {
+      localStorage.setItem('openPage', 'writing');
     }
   </script>
+
 </body>
 </html>
