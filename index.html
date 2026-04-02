@@ -26,8 +26,8 @@
     font-family: var(--font); 
     min-height: 100vh; 
     display: flex; 
-    flex-direction: column; /* Stretches page to accept consistent footers */
-    justify-content: space-between; 
+    flex-direction: column; 
+    justify-content: flex-start; 
     align-items: center; 
     overflow: hidden; 
   }
@@ -43,7 +43,7 @@
   }
 
   /* ==========================================
-     UNIVERSAL HEADER & FOOTER
+     UNIVERSAL HEADER
      ========================================== */
   .global-header {
     width: 100%;
@@ -89,54 +89,13 @@
     transform: scaleY(1.1);
   }
 
-  .global-footer {
-    width: 100%;
-    background-color: var(--bg-poster);
-    border-top: 2px solid var(--black);
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 30px;
-  }
-
-  .footer-links button {
-    font-size: 12px;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: var(--black);
-    text-decoration: none;
-    border: none;
-    background: none;
-    cursor: pointer;
-    letter-spacing: 1px;
-    transition: color 0.2s;
-  }
-
-  .footer-links button:hover {
-    color: var(--nosebleed-red);
-  }
-
-  .footer-credit {
-    font-size: 11px;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
-  }
-
   /* ==========================================
-     ARTISTIC CANVAS (MAINTAINED)
+     ARTISTIC CANVAS (RE-PROPORTIONED)
      ========================================== */
   .canvas { 
     width: 96vw; 
     max-width: 1400px; 
-    height: 75vh; /* Adjusted height to breathe between header and footer */
+    height: calc(100vh - 65px); /* Perfectly fills the space below the header without overflow */
     position: relative; 
     display: grid; 
     grid-template-columns: repeat(12, 1fr); 
@@ -151,30 +110,35 @@
   .red-shard { background-color: var(--nosebleed-red); }
   .drift-fast { animation: driftRight 18s linear infinite, spinShard 20s linear infinite; }
   .drift-slow { animation: driftLeft 30s linear infinite, spinShard 35s linear infinite reverse; }
-  .p1 { width: 120px; height: 100px; top: 10%; left: 5%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); }
-  .p2 { width: 60px; height: 60px; top: 35%; left: 25%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); }
+  
+  /* Adjusted shard placements to clear top margins */
+  .p1 { width: 120px; height: 100px; top: 15%; left: 5%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); }
+  .p2 { width: 60px; height: 60px; top: 40%; left: 25%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); }
   .p3 { width: 150px; height: 130px; top: 65%; left: 45%; clip-path: polygon(0 0, 100% 30%, 85% 100%, 10% 85%); }
   .p4 { width: 40px; height: 50px; top: 75%; left: 80%; clip-path: polygon(10% 10%, 90% 20%, 100% 90%, 20% 100%); }
-  .p5 { width: 180px; height: 140px; top: 5%; left: 75%; clip-path: polygon(30% 0%, 90% 10%, 100% 70%, 0% 100%); }
+  .p5 { width: 180px; height: 140px; top: 10%; left: 75%; clip-path: polygon(30% 0%, 90% 10%, 100% 70%, 0% 100%); }
   
   @keyframes driftRight { 0% { transform: translateX(-200px); } 100% { transform: translateX(calc(96vw + 200px)); } }
   @keyframes driftLeft { 0% { transform: translateX(calc(96vw + 200px)); } 100% { transform: translateX(-200px); } }
   @keyframes spinShard { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   
-  .hero-drip-container { grid-column: 6 / 10; grid-row: 2 / 7; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; animation: floatingPrimary 8s ease-in-out infinite; }
+  /* Pushed the blob down slightly from row 2 to prevent any head clipping */
+  .hero-drip-container { grid-column: 6 / 10; grid-row: 3 / 8; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; animation: floatingPrimary 8s ease-in-out infinite; }
   
   @keyframes floatingPrimary { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
   
-  .hero-drip { width: 100%; height: 100%; background-color: var(--nosebleed-red); opacity: var(--current-opacity); background-size: 130%; background-position: 50% 92%; clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); pointer-events: auto; cursor: pointer; filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); }
+  /* FIXED IMAGE POSITION: scaled down slightly and nudged vertically to preserve head visibility */
+  .hero-drip { width: 100%; height: 100%; background-color: var(--nosebleed-red); opacity: var(--current-opacity); background-size: 110%; background-position: 50% 5%; clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); pointer-events: auto; cursor: pointer; filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); }
   .hero-drip:hover { transform: scale(1.05) rotate(-2deg); }
   .hero-drip::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--pistachio); opacity: 0.15; mix-blend-mode: color-burn; }
   .hero-drip::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: var(--nosebleed-red); opacity: 0.22; mix-blend-mode: overlay; }
   
-  .masthead { grid-column: 1 / 13; grid-row: 7 / 13; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 20px; pointer-events: none; }
+  .masthead { grid-column: 1 / 13; grid-row: 8 / 13; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 20px; pointer-events: none; }
   .main-title { font-size: 110px; font-weight: 900; letter-spacing: -7px; line-height: 0.75; text-transform: uppercase; color: var(--black); margin-bottom: 5px; transform: scaleY(1.15); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
   .sub-title { font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; color: var(--nosebleed-red); margin-bottom: 20px; transform: scaleY(1.1); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
   
-  .section-content { grid-column: 2 / 12; grid-row: 2 / 7; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s var(--ease); display: flex; flex-direction: column; justify-content: center; }
+  /* Pushed the text pages down to row 3 to prevent header overlapping/clipping */
+  .section-content { grid-column: 2 / 12; grid-row: 3 / 8; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s var(--ease); display: flex; flex-direction: column; justify-content: center; }
   .section-content.active { opacity: 1; pointer-events: auto; }
   .section-title { font-size: 55px; font-weight: 900; text-transform: uppercase; letter-spacing: -3px; margin-bottom: 20px; transform: scaleY(1.1); transform-origin: left; color: var(--nosebleed-red); display: inline-block; }
   
@@ -186,18 +150,19 @@
   .editorial-link { font-size: 13px; font-weight: 900; color: var(--black); text-decoration: none; text-transform: uppercase; display: block; padding: 5px 0; transition: transform 0.2s, color 0.2s; }
   .editorial-link:hover { color: var(--pistachio); transform: scaleY(1.3) translateX(5px); transform-origin: top; }
   
-  .canvas.shifted .hero-drip { transform: scale(0.5) translateY(140px) translateX(300px); }
+  /* Kept transition scale effects aligned with new positioning */
+  .canvas.shifted .hero-drip { transform: scale(0.5) translateY(100px) translateX(300px); }
   .canvas.shifted .main-title, .canvas.shifted .sub-title { opacity: 0.03; }
   .red-divider { border-top: 4px solid var(--nosebleed-red); margin-bottom: 20px; }
   
   @media (max-width: 768px) { 
     .main-title { font-size: 55px; letter-spacing: -2px; } 
     .sub-title { font-size: 22px; } 
-    .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 6; } 
+    .hero-drip-container { grid-column: 4 / 10; grid-row: 3 / 7; } 
     .writing-grid { grid-template-columns: 1fr; } 
-    .canvas { width: 96vw; height: 75vh; } 
     .global-header { padding: 15px 20px; }
     .nav-links { gap: 15px; }
+    .section-content { grid-row: 3 / 9; } /* Gives mobile text more vertical track */
   }
 </style>
 </head>
@@ -277,21 +242,9 @@
     </div>
   </div>
 
-  <footer class="global-footer">
-    <div class="footer-credit">© 2026 Ronan Sullivan — All Rights Reserved</div>
-    <nav class="footer-links">
-      <button onclick="openPage('home')">Home</button>
-      <button onclick="openPage('about')">About</button>
-      <button onclick="openPage('writing')">Writing</button>
-      <button onclick="openPage('contact')">Contact</button>
-    </nav>
-  </footer>
-
   <script>
     function openPage(pageId) {
-      // Hide all content sections and remove active classes
       document.querySelectorAll('.section-content').forEach(p => p.classList.remove('active'));
-      
       const canvas = document.getElementById('main-canvas');
       
       if (pageId === 'home') {
@@ -304,7 +257,6 @@
       }
     }
     
-    // Check if user came from clicking a link on an article page
     window.onload = function() {
       const savedPage = localStorage.getItem('openPage');
       if (savedPage) { 
