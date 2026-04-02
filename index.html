@@ -152,13 +152,13 @@
     pointer-events: auto;
     cursor: pointer;
     
-    /* 🛠️ FILTER ADJUSTMENT FOR DISCERNIBLE FEATURES */
+    /* 🛠️ FILTER ADJUSTMENT FOR DISCERNIBLE MOUTH */
     filter: 
       grayscale(100%) 
-      contrast(280%)    /* backed off from 340% to open up shadows */
+      contrast(220%)    /* aggressively backed off from 280% to open up shadows */
       sepia(100%)      
-      hue-rotate(-52deg) 
-      brightness(88%);  /* lifted from 70% to show skin/glasses */
+      hue-rotate(-42deg) /* slightly cooler for sharper definition */
+      brightness(102%);  /* lifted past 100% to light the darkest areas */
   }
 
   .hero-drip:hover {
