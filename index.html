@@ -17,7 +17,7 @@
     --nosebleed-red: #7c2230; 
     --font: 'Archivo', sans-serif; 
     --ease: cubic-bezier(0.77, 0, 0.175, 1); 
-    --current-opacity: 0.55; /* Slightly softer to blend asteroids */
+    --current-opacity: 0.65; 
   }
 
   body { 
@@ -97,24 +97,24 @@
   .canvas::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%); opacity: 0.12; mix-blend-mode: multiply; }
   
   /* ==========================================
-     ASTEROID SHARDS (TRUE BACKGROUND)
+     ASTEROID SHARDS (SANDWICHED IN MIDDLE)
      ========================================== */
   .geo-shard { 
-    position: fixed; /* Moves relative to screen width, not just the canvas */
+    position: absolute; 
     opacity: var(--current-opacity); 
-    z-index: 0; /* Forced to absolute background */
+    z-index: 1; /* Sits above canvas bg, but below hero image and boxes */
     pointer-events: none; 
     transition: opacity 1.2s var(--ease); 
   }
   .green-shard { background-color: var(--pistachio); }
   .red-shard { background-color: var(--nosebleed-red); }
   
-  /* ASTEROID TRAJECTORIES (Full Screen Width) */
+  /* ASTEROID TRAJECTORIES (Full Canvas Width) */
   .drift-fast { animation: driftAcross 15s linear infinite, spinShard 10s linear infinite; }
   .drift-med { animation: driftAcross 25s linear infinite, spinShard 20s linear infinite reverse; }
   .drift-slow { animation: driftAcross 40s linear infinite, spinShard 35s linear infinite; }
   
-  /* Positions and Shapes */
+  /* Starting Heights and Polygon Shapes */
   .p1 { width: 120px; height: 100px; top: 15%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); animation-delay: -2s; }
   .p2 { width: 60px; height: 60px; top: 65%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); animation-delay: -10s; }
   .p3 { width: 80px; height: 80px; top: 40%; clip-path: polygon(0 0, 100% 30%, 50% 100%); animation-delay: -5s; }
@@ -124,7 +124,7 @@
 
   @keyframes driftAcross { 
     0% { transform: translateX(-200px); } 
-    100% { transform: translateX(calc(100vw + 200px)); } 
+    100% { transform: translateX(calc(96vw + 200px)); } 
   }
   @keyframes spinShard { 
     0% { transform: rotate(0deg); } 
@@ -150,6 +150,7 @@
     pointer-events: auto; 
     cursor: default;
     filter: grayscale(100%) contrast(160%) brightness(100%); 
+    z-index: 12; /* Placed directly above shifting asteroids */
   }
   
   .hero-drip:hover { transform: none; }
@@ -199,14 +200,13 @@
   .featured-story-box {
     grid-column: 9 / 13;
     grid-row: 1 / 9; 
-    z-index: 30;
+    z-index: 30; /* High index protects text from asteroids */
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
     border-bottom: 4px solid var(--black); 
-    /* TRUE RIGID SEPARATION BORDER */
     border-left: 4px solid var(--black); 
     background-color: var(--bg-poster);
     overflow-y: auto; 
@@ -289,7 +289,6 @@
   
   @media (max-width: 768px) { 
     .main-title { font-size: 55px; letter-spacing: -2px; } 
-    .canvas::before { display: none; }
     .hero-drip-container { grid-column: 2 / 12; grid-row: 2 / 5; } 
     .featured-story-box { grid-column: 2 / 12; grid-row: 5 / 10; padding: 10px 0; }
     .section-content { grid-column: 2 / 12; grid-row: 2 / 10; }
@@ -307,15 +306,15 @@
     </nav>
   </header>
 
-  <div class="geo-shard green-shard p1 drift-med"></div>
-  <div class="geo-shard red-shard p2 drift-slow"></div>
-  <div class="geo-shard green-shard p3 drift-fast"></div>
-  <div class="geo-shard red-shard p4 drift-med"></div>
-  <div class="geo-shard green-shard p5 drift-slow"></div>
-  <div class="geo-shard red-shard p6 drift-fast"></div>
-
   <div class="canvas" id="main-canvas">
     
+    <div class="geo-shard green-shard p1 drift-med"></div>
+    <div class="geo-shard red-shard p2 drift-slow"></div>
+    <div class="geo-shard green-shard p3 drift-fast"></div>
+    <div class="geo-shard red-shard p4 drift-med"></div>
+    <div class="geo-shard green-shard p5 drift-slow"></div>
+    <div class="geo-shard red-shard p6 drift-fast"></div>
+
     <div class="hero-drip-container">
       <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
     </div>
@@ -431,7 +430,7 @@
       
       if (pageId === 'home') {
         canvas.classList.remove('shifted');
-        document.documentElement.style.setProperty('--current-opacity', '0.55');
+        document.documentElement.style.setProperty('--current-opacity', '0.65');
       } else {
         canvas.classList.add('shifted');
         const section = document.getElementById('page-' + pageId);
