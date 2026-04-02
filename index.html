@@ -145,24 +145,20 @@
     height: 100%;
     background-color: var(--nosebleed-red);
     opacity: var(--current-opacity);
-    
-    /* 1. SCALE DOWN TO 130% (FROM 170%) TO STOP CUTTING YOUR HEAD */
     background-size: 130%;
-    /* 2. RE-POSITION TO FOCUS ON FACE & PREVENT TOP CLIPPING */
     background-position: 50% 92%; 
-    
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%);
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
     pointer-events: auto;
     cursor: pointer;
     
-    /* 3. HARD DARKS, ZERO BLANCHING */
+    /* 🛠️ FILTER ADJUSTMENT FOR DISCERNIBLE FEATURES */
     filter: 
       grayscale(100%) 
-      contrast(340%)    
+      contrast(280%)    /* backed off from 340% to open up shadows */
       sepia(100%)      
       hue-rotate(-52deg) 
-      brightness(70%);  
+      brightness(88%);  /* lifted from 70% to show skin/glasses */
   }
 
   .hero-drip:hover {
