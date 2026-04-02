@@ -74,7 +74,7 @@
   .canvas { 
     width: 96vw; 
     max-width: 1400px; 
-    height: calc(100vh - 105px); 
+    height: calc(100vh - 70px); 
     position: relative; 
     display: grid; 
     grid-template-columns: repeat(12, 1fr); 
@@ -85,6 +85,7 @@
     margin-top: 5px;
   }
 
+  /* Hard-grid raw layout vertical line */
   .canvas::before {
     content: '';
     position: absolute;
@@ -98,6 +99,7 @@
 
   .canvas::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%); opacity: 0.12; mix-blend-mode: multiply; }
   
+  /* SHARDS */
   .geo-shard { position: absolute; opacity: var(--current-opacity); z-index: 1; pointer-events: none; transition: opacity 1.2s var(--ease); }
   .green-shard { background-color: var(--pistachio); }
   .red-shard { background-color: var(--nosebleed-red); }
@@ -106,13 +108,12 @@
   
   .p1 { width: 120px; height: 100px; top: 15%; left: 5%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); }
   .p2 { width: 60px; height: 60px; top: 40%; left: 25%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); }
-  .p3 { width: 150px; height: 130px; top: 65%; left: 45%; clip-path: polygon(0 0, 100% 30%, 85% 100%, 10% 85%); }
-  .p4 { width: 40px; height: 50px; top: 75%; left: 60%; clip-path: polygon(10% 10%, 90% 20%, 100% 90%, 20% 100%); }
   
   @keyframes driftRight { 0% { transform: translateX(-200px); } 100% { transform: translateX(calc(96vw + 200px)); } }
   @keyframes driftLeft { 0% { transform: translateX(calc(96vw + 200px)); } 100% { transform: translateX(-200px); } }
   @keyframes spinShard { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   
+  /* HERO IMAGE */
   .hero-drip-container { grid-column: 2 / 7; grid-row: 3 / 8; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; animation: floatingPrimary 8s ease-in-out infinite; }
   
   @keyframes floatingPrimary { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
@@ -128,28 +129,64 @@
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
     pointer-events: auto; 
     cursor: default;
+    /* FILMIC SHEEN: Retains grayscale pop with high contrast */
     filter: grayscale(100%) contrast(150%) sepia(30%) brightness(100%); 
   }
   
-  .hero-drip:hover { transform: scale(1.05) rotate(-2deg); }
+  /* MOVEMENT REMOVED FROM HOVER STATE */
+  .hero-drip:hover { transform: none; }
   
   .masthead { grid-column: 1 / 9; grid-row: 9 / 13; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; pointer-events: none; }
-  .main-title { font-size: 100px; font-weight: 900; letter-spacing: -6px; line-height: 0.75; text-transform: uppercase; color: var(--black); margin-bottom: 5px; transform: scaleY(1.15); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
-  .sub-title { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; color: var(--nosebleed-red); transform: scaleY(1.1); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
+  
+  /* MASTHEAD LINKS */
+  .main-title { 
+    font-size: 100px; 
+    font-weight: 900; 
+    letter-spacing: -6px; 
+    line-height: 0.75; 
+    text-transform: uppercase; 
+    color: var(--black); 
+    margin-bottom: 5px; 
+    transform: scaleY(1.15); 
+    transform-origin: bottom; 
+    transition: opacity 0.6s var(--ease), color 0.3s ease; 
+    pointer-events: auto; 
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; 
+  }
+  
+  .main-title:hover { color: var(--pistachio); }
+  
+  .sub-title { 
+    font-size: 28px; 
+    font-weight: 900; 
+    text-transform: uppercase; 
+    letter-spacing: -1px; 
+    color: var(--nosebleed-red); 
+    transform: scaleY(1.1); 
+    transform-origin: bottom; 
+    transition: opacity 0.6s var(--ease), color 0.3s ease; 
+    pointer-events: auto; 
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; 
+  }
+  
+  .sub-title:hover { color: var(--pistachio); }
   
   /* ==========================================
-     FEATURED STORY BOX (EXPANDED WITH PREVIEW)
+     FEATURED STORY BOX
      ========================================== */
   .featured-story-box {
     grid-column: 9 / 13;
-    grid-row: 2 / 12; /* Expanded to fit imagery and text */
+    grid-row: 2 / 12; 
     z-index: 30;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-    overflow-y: auto; /* Fallback in case titles run long on smaller windows */
   }
 
   .featured-story-box .story-image {
@@ -192,7 +229,7 @@
     font-weight: 400;
     line-height: 1.4;
     color: var(--black);
-    opacity: 0.85;
+    opacity: 1; /* Darker, high-contrast text */
     margin-bottom: 15px;
   }
 
@@ -204,7 +241,7 @@
     text-transform: uppercase;
     align-self: flex-start;
     transition: transform 0.2s, color 0.2s;
-    margin-top: auto; /* Pushes button to the bottom */
+    margin-top: auto; 
   }
 
   .featured-story-box .story-link:hover {
@@ -216,7 +253,7 @@
 
   /* ==========================================
      DYNAMIC SECTIONS
-     ========================================== */
+     ========================================= */
   .section-content { grid-column: 2 / 8; grid-row: 3 / 9; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s var(--ease); display: flex; flex-direction: column; justify-content: center; }
   .section-content.active { opacity: 1; pointer-events: auto; }
   .section-title { font-size: 50px; font-weight: 900; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 20px; transform: scaleY(1.1); transform-origin: left; color: var(--nosebleed-red); display: inline-block; }
@@ -232,48 +269,6 @@
   .canvas.shifted .hero-drip { transform: scale(0.5) translateY(100px) translateX(-100px); }
   .canvas.shifted .main-title, .canvas.shifted .sub-title { opacity: 0.03; }
   
-  /* ==========================================
-     TICKER SYSTEM
-     ========================================== */
-  .ticker-bar {
-    width: 100%;
-    height: 35px;
-    background-color: var(--black);
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    border-top: 2px solid var(--black);
-  }
-
-  .ticker-content {
-    display: flex;
-    white-space: nowrap;
-    animation: tickerLoop 30s linear infinite;
-  }
-
-  .ticker-item {
-    font-size: 12px;
-    font-weight: 900;
-    color: var(--bg-poster);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-  }
-
-  .ticker-item::after {
-    content: '///';
-    color: var(--nosebleed-red);
-    margin-left: 40px;
-  }
-
-  @keyframes tickerLoop {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
   @media (max-width: 768px) { 
     .main-title { font-size: 55px; letter-spacing: -2px; } 
     .canvas::before { display: none; }
@@ -297,16 +292,14 @@
   <div class="canvas" id="main-canvas">
     <div class="geo-shard green-shard p1 drift-fast"></div>
     <div class="geo-shard red-shard p2 drift-slow"></div>
-    <div class="geo-shard green-shard p3 drift-slow"></div>
-    <div class="geo-shard red-shard p4 drift-fast"></div>
     
     <div class="hero-drip-container">
       <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
     </div>
     
     <div class="masthead">
-      <div><h1 class="main-title">Ronan<br>Sullivan</h1></div>
-      <div><h2 class="sub-title">Portfolio</h2></div>
+      <div><a class="main-title" onclick="openPage('about')">Ronan<br>Sullivan</a></div>
+      <div><a class="sub-title" onclick="openPage('writing')">Portfolio</a></div>
     </div>
 
     <div class="featured-story-box">
@@ -355,41 +348,30 @@
     </div>
   </div>
 
-  <div class="ticker-bar">
-    <div class="ticker-content" id="ticker-slider">
-      <div class="ticker-item">PA Media Academy // London</div>
-      <div class="ticker-item" id="ticker-time">Updating feed...</div>
-      <div class="ticker-item">Open for freelance inquiries</div>
-      <div class="ticker-item">PA Media Academy // London</div>
-      <div class="ticker-item" id="ticker-time-dup">Updating feed...</div>
-      <div class="ticker-item">Open for freelance inquiries</div>
-    </div>
-  </div>
-
   <script>
-    // 1. POOL OF ARTICLES (With previews and images)
+    // 1. POOL OF ARTICLES (Vetted file names mapped precisely to your directory)
     const featuredArticles = [
       {
         label: "Sports Report",
         title: "Win over Welsh side secures Fenix Trophy play-off place",
-        preview: "Enfield Town took a huge step towards securing their place in the Fenix Trophy play-offs after a hard-fought victory over Welsh side Llantwit Major...",
-        image: "https://via.placeholder.com/400x300/7c2230/bcc6cc?text=SPORTS", // Replace with your own img URL
+        preview: "Enfield Town took a huge step towards securing their place in the Fenix Trophy play-offs after a hard-fought victory over Welsh side Llantwit Major. A goal in each half proved the difference in a match of high intensity and grit. The win effectively mathematical certainty for the final tournament, marking a major milestone in Enfield Town's historic European debut campaign. Manager and players alike praised the vocal home support that provided the extra edge needed.",
+        image: "WhatsApp Image 2026-04-02 at 16.24.27.jpeg", 
         link: "https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/",
         cta: "Read Full Report →"
       },
       {
         label: "Arts Column",
         title: "Dissecting the French New Wave: Cléo from 5 to 7",
-        preview: "Agnès Varda's masterful exploration of existential dread and the female gaze remains as sharp and visually striking today as it did in 1962...",
-        image: "https://via.placeholder.com/400x300/5b6e56/bcc6cc?text=FILM", // Replace with your own img URL
+        preview: "Agnès Varda's masterful exploration of existential dread and the female gaze remains as sharp and visually striking today as it did in 1962. We follow Cléo, a pop singer, across Paris in real-time as she awaits the results of a biopsy. Our essay argues that Varda systematically deconstructs the objective male view of women, replacing it with Cléo's internal, transformative experience of the city itself—a profound shift from object to subject that defined a generation.",
+        image: "Cleo From 5 to 7.jpg", 
         link: "cleo-from-5-to-7.html",
         cta: "Read Essay →"
       },
       {
         label: "Book Critique",
         title: "A Masterpiece of Dystopian Fiction: Prophet Song",
-        preview: "Paul Lynch's Booker Prize winner captures a chillingly claustrophobic vision of a society collapsing under authoritarian drift...",
-        image: "https://via.placeholder.com/400x300/0d0d0d/bcc6cc?text=BOOKS", // Replace with your own img URL
+        preview: "Paul Lynch's Booker Prize winner captures a chillingly claustrophobic vision of a society collapsing under authoritarian drift. The narrative follows Eilish Stack, a mother of four, trying to maintain normalcy as her Dublin neighborhood is consumed by emergency powers and state paranoia. It is a terrifyingly plausible look at how quickly liberty can be bartered for 'security', and how ordinary citizens must confront impossible moral choices when law itself becomes the weapon of oppression.",
+        image: "Prophet Song Book.jpg", 
         link: "prophet-song.html",
         cta: "Read Analysis →"
       }
@@ -407,18 +389,7 @@
       document.getElementById('featured-img').style.backgroundImage = `url('${chosen.image}')`;
     }
 
-    // 2. LIVE CLOCK FOR TICKER
-    function updateTickerTime() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).toUpperCase();
-      const fullStr = `${dateStr} // ${timeStr}`;
-      
-      document.getElementById('ticker-time').textContent = fullStr;
-      document.getElementById('ticker-time-dup').textContent = fullStr;
-    }
-
-    // 3. PAGE TRANSITIONS
+    // 2. PAGE TRANSITIONS
     function openPage(pageId) {
       document.querySelectorAll('.section-content').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
@@ -441,8 +412,6 @@
     
     window.onload = function() {
       setupFeaturedStory();
-      updateTickerTime();
-      setInterval(updateTickerTime, 1000);
       
       const savedPage = localStorage.getItem('openPage');
       if (savedPage) { 
