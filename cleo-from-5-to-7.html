@@ -16,7 +16,6 @@
     --pistachio: #5b6e56; 
     --nosebleed-red: #7c2230; 
     --font: 'Archivo', sans-serif; 
-    --ease: cubic-bezier(0.77, 0, 0.175, 1); 
   }
 
   body { 
@@ -41,7 +40,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); 
   }
 
-  /* UNIVERSAL HEADER */
+  /* GLOBAL HEADER */
   .global-header {
     width: 100%;
     background-color: var(--bg-poster);
@@ -56,7 +55,7 @@
 
   .nav-links { display: flex; gap: 25px; }
 
-  .nav-links .nav-btn {
+  .nav-links a {
     font-size: 12px;
     font-weight: 900;
     text-transform: uppercase;
@@ -68,8 +67,8 @@
     display: inline-block;
   }
 
-  .nav-links .nav-btn:hover { transform: scaleY(1.13); }
-  .nav-links .nav-btn.active { color: var(--nosebleed-red); }
+  .nav-links a:hover { transform: scaleY(1.13); }
+  .nav-links a.active { color: var(--nosebleed-red); }
 
   /* ARTICLE LAYOUT */
   .article-container {
@@ -141,10 +140,10 @@
 
   <header class="global-header">
     <nav class="nav-links">
-      <a href="index.html" class="nav-btn">Home</a>
-      <a href="index.html?page=about" class="nav-btn">About</a>
-      <a href="index.html?page=writing" class="nav-btn active">Writing</a>
-      <a href="index.html?page=contact" class="nav-btn">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="index.html?page=about">About</a>
+      <a href="index.html?page=writing" class="active">Writing</a>
+      <a href="index.html?page=contact">Contact</a>
     </nav>
   </header>
 
@@ -160,7 +159,6 @@
     <div class="article-body">
       <p>Agnès Varda's masterful exploration of existential dread and the female gaze remains as sharp and visually striking today as it did in 1962. We follow Cléo, a pop singer, across Paris in real-time as she awaits the results of a biopsy.</p>
       <p>Our essay argues that Varda systematically deconstructs the objective male view of women, replacing it with Cléo's internal, transformative experience of the city itself—a profound shift from object to subject that defined a generation.</p>
-      <p>By trapping the viewer in the literal ticking clock of the afternoon, Varda allows the atmosphere to build an oppressive weight. Mirrors and shop windows serve as markers of vanity and distortion, ultimately concluding in a profound acceptance of self and mortality among the drifting crowds of Paris.</p>
     </div>
   </main>
 
