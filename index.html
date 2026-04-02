@@ -18,7 +18,7 @@
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
     
-    /* Dynamic opacity variables controlled via JS - DIALED DOWN TO 0.72 */
+    /* Dynamic opacity variables controlled via JS */
     --current-opacity: 0.72; 
   }
 
@@ -84,7 +84,6 @@
   /* Continuous non-uniform rotation and drifting */
   .drift-fast { animation: driftRight 18s linear infinite, spinShard 20s linear infinite; }
   .drift-slow { animation: driftLeft 30s linear infinite, spinShard 35s linear infinite reverse; }
-  .drift-mid { animation: driftRight 24s linear infinite, spinShard 25s linear infinite; }
 
   /* Pure CSS Polygons for highly non-uniform shapes */
   .p1 { 
@@ -106,19 +105,6 @@
   .p5 { 
     width: 180px; height: 140px; top: 5%; left: 75%; 
     clip-path: polygon(30% 0%, 90% 10%, 100% 70%, 0% 100%);
-  }
-  /* NEW EXTRA SHARDS */
-  .p6 { 
-    width: 80px; height: 70px; top: 50%; left: 5%; 
-    clip-path: polygon(0% 20%, 60% 0%, 100% 100%, 20% 80%);
-  }
-  .p7 { 
-    width: 50px; height: 90px; top: 20%; left: 60%; 
-    clip-path: polygon(50% 0%, 100% 30%, 50% 100%, 0% 50%);
-  }
-  .p8 { 
-    width: 110px; height: 50px; top: 85%; left: 20%; 
-    clip-path: polygon(10% 0%, 100% 70%, 90% 100%, 0% 30%);
   }
 
   @keyframes driftRight {
@@ -324,9 +310,6 @@
     <div class="geo-shard green-shard p3 drift-slow"></div>
     <div class="geo-shard red-shard p4 drift-fast"></div>
     <div class="geo-shard green-shard p5 drift-slow"></div>
-    <div class="geo-shard green-shard p6 drift-mid"></div>
-    <div class="geo-shard red-shard p7 drift-slow"></div>
-    <div class="geo-shard green-shard p8 drift-mid"></div>
 
     <div class="hero-drip-container">
       <div id="primary-blob" class="hero-drip" style="background-image: url('hero-face.jpg');"></div>
