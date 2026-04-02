@@ -288,4 +288,128 @@
     padding-top: 10px;
   }
 
-  .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0
+  .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
+  .cat-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 10px; }
+  
+  .editorial-link {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--black);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 5px 0;
+    transition: transform 0.2s;
+  }
+  .editorial-link:hover { 
+    transform: scaleY(1.3) translateX(5px);
+    transform-origin: top;
+  }
+
+  /* DYNAMIC CANVAS STATE */
+  .canvas.shifted .hero-drip {
+    transform: scale(0.5) translateY(140px) translateX(240px);
+  }
+
+  .canvas.shifted .main-title {
+    opacity: 0.03;
+  }
+
+  @media (max-width: 768px) {
+    .main-title { font-size: 65px; letter-spacing: -3px; }
+    .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 7; }
+    .writing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="canvas" id="main-canvas">
+    
+    <div class="geo-shard green-shard p1 drift-fast"></div>
+    <div class="geo-shard red-shard p2 drift-slow"></div>
+    <div class="geo-shard green-shard p3 drift-slow"></div>
+    <div class="geo-shard red-shard p4 drift-fast"></div>
+    <div class="geo-shard green-shard p5 drift-slow"></div>
+
+    <div class="hero-drip-container">
+      <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
+    </div>
+
+    <div class="masthead">
+      <h1 class="main-title">Ronan<br>Sullivan</h1>
+      <nav class="main-nav">
+        <button class="nav-item" id="nav-home" onclick="openPage('home')">Home</button>
+        <button class="nav-item" id="nav-about" onclick="openPage('about')">About</button>
+        <button class="nav-item" id="nav-writing" onclick="openPage('writing')">Writing</button>
+        <button class="nav-item" id="nav-contact" onclick="openPage('contact')">Contact</button>
+      </nav>
+    </div>
+
+    <div class="section-content" id="page-about">
+      <h2 class="section-title">About</h2>
+      <div style="font-size: 24px; font-weight: 900; line-height: 1.3; max-width: 650px; letter-spacing: -0.5px;">
+        I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing, bridging the gap between grassroots triumphs and professional artistry.
+      </div>
+    </div>
+
+    <div class="section-content" id="page-writing">
+      <h2 class="section-title">Writing</h2>
+      <div class="writing-grid">
+        <div class="category-group">
+          <span class="cat-label">Section 01</span>
+          <h3 class="cat-title">Live Sports</h3>
+          <a href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank" class="editorial-link">View Fenix Trophy Coverage →</a>
+        </div>
+        <div class="category-group">
+          <span class="cat-label">Section 02</span>
+          <h3 class="cat-title">Theatre & Arts</h3>
+          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" class="editorial-link">The Motive and the Cue Review →</a>
+          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" class="editorial-link">Dancing at Lughnasa Review →</a>
+        </div>
+        <div class="category-group">
+          <span class="cat-label">Section 03</span>
+          <h3 class="cat-title">Columns</h3>
+          <a href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" class="editorial-link">'Acting Souljam...' →</a>
+          <a href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" class="editorial-link">'Fresh Year' →</a>
+        </div>
+        <div class="category-group">
+          <span class="cat-label">Section 04</span>
+          <h3 class="cat-title">Book Critiques</h3>
+          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: My Brilliant Friend →</a>
+          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: Second Place →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-content" id="page-contact">
+      <h2 class="section-title">Contact</h2>
+      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">ronansullivan@hotmail.co.uk</a>
+      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">View LinkedIn Profile →</a>
+    </div>
+
+  </div>
+
+  <script>
+    function openPage(pageId) {
+      document.querySelectorAll('.section-content').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-nav'));
+      
+      const canvas = document.getElementById('main-canvas');
+
+      if (pageId === 'home') {
+        canvas.classList.remove('shifted');
+        document.getElementById('nav-home').classList.add('active-nav');
+        document.documentElement.style.setProperty('--current-opacity', '0.72');
+      } else {
+        canvas.classList.add('shifted');
+        document.getElementById('nav-' + pageId).classList.add('active-nav');
+        document.getElementById('page-' + pageId).classList.add('active');
+        document.documentElement.style.setProperty('--current-opacity', '0.08');
+      }
+    }
+
+    document.getElementById('nav-home').classList.add('active-nav');
+  </script>
+</body>
+</html>
