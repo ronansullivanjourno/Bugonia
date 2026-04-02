@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prophet Song Review — Ronan Sullivan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-poster: #bcc6cc; 
+    --black: #0d0d0d;
+    --pistachio: #5b6e56; 
+    --nosebleed-red: #7c2230; 
+    --font: 'Archivo', sans-serif;
+    --ease: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  body {
+    background-color: var(--bg-poster);
+    color: var(--black);
+    font-family: var(--font);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  /* INTENSE FILM GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 50;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* CONTAINER FOR THE ESSAY */
+  .article-container {
+    width: 96vw;
+    max-width: 800px;
+    padding: 80px 20px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .back-btn {
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    transition: transform 0.2s, color 0.2s;
+  }
+  .back-btn:hover {
+    color: var(--pistachio);
+    transform: scaleY(1.2) translateX(-5px);
+  }
+
+  header {
+    margin-bottom: 40px;
+  }
+
+  .main-title {
+    font-size: 65px;
+    font-weight: 900;
+    letter-spacing: -4px;
+    line-height: 0.85;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 15px;
+    transform: scaleY(1.1);
+    transform-origin: bottom;
+  }
+
+  .sub-title {
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: var(--nosebleed-red);
+    display: inline-block;
+  }
+
+  .meta-divider {
+    border-top: 4px solid var(--nosebleed-red);
+    margin: 30px 0;
+  }
+
+  .byline-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--black);
+  }
+
+  .article-body {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: justify;
+  }
+
+  .article-body p {
+    margin-bottom: 30px;
+  }
+
+  /* IMAGE BOXES */
+  .essay-image-container {
+    margin: 40px 0;
+    border: 4px solid var(--black);
+    background-color: var(--black);
+    position: relative;
+  }
+
+  .essay-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%) contrast(110%);
+    transition: filter 0.3s;
+  }
+
+  .essay-image-container img:hover {
+    filter: grayscale(0%) contrast(100%);
+  }
+
+  .image-caption {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--bg-poster);
+    background-color: var(--black);
+    padding: 12px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* BLOCKQUOTE FOR HEAVY EMPHASIS */
+  blockquote {
+    border-left: 4px solid var(--nosebleed-red);
+    padding-left: 20px;
+    margin: 30px 0;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .main-title { font-size: 40px; letter-spacing: -2px; }
+    .article-container { padding: 40px 15px; }
+    .byline-container { flex-direction: column; gap: 5px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="article-container">
+    <a href="index.html" class="back-btn" onclick="goToWriting()">← Back to Portfolio</a>
+
+    <header>
+      <h1 class="main-title">Prophet Song</h1>
+      <h2 class="sub-title">Creep of an Irish tyrannical government</h2>
+      <div class="meta-divider"></div>
+      <div class="byline-container">
+        <span>By Ronan Sullivan</span>
+        <span>Published 18th Sep 2024</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+      
+      <div class="essay-image-container">
+        <img src="Prophet%20Song%20Book.jpg" alt="Prophet Song by Paul Lynch">
+        <div class="image-caption">Prophet Song — 2023 Booker Prize Winner</div>
+      </div>
+
+      <p>
+        <strong>The 2023 Booker Prize Winner is a stylish but substantive look into the creep of an Irish tyrannical government.</strong>
+      </p>
+
+      <p>
+        Prophet Song is a tome of dystopian portent: Larry, father of four, is visited in the night by faceless Gardai because of his union job. Eilish, his wife and our narrative focus hereafter, is convinced of the visit’s insignificance, despite rumours of men and women disappeared shortly after these doorstep meetings.
+      </p>
+
+      <p>
+        A new, fascistic government is alluded to, bearing hallmarks of tyrants past and present: suppression of the press, rounding up of opposition, and a staunch, zealous loyalty to the country.
+      </p>
+
+      <p>
+        Sure enough, Larry is taken: he does not return after being interviewed by the local Gardai. Their daughter, Molly, puts up white ribbons on a tree: one for every week Larry is missing. Soon the trunk is tied in several, as their eldest, Mark, becomes aggravated by the country’s slide into fascism. Bailey – their youngest – Eilish sees in him a masculine and latent rage.
+      </p>
+
+      <p>
+        She tries to keep her family together as Ireland sinks deeper into tyranny: more and more people disappearing, foreign media suppressed, as the flow of information becomes a slow drip.
+      </p>
+
+      <blockquote>
+        “Get out”, he tells Eilish. “Before it’s too late”.
+      </blockquote>
+
+      <p>
+        Her sister, Aine, is safely in Canada, but she is one of many alluding to the possible need to leave Ireland as quickly as possible. Their ailing father, Simon, among non-sequiturs, concurs with the sentiment. He sees the wood for the trees and the path the country is taking.
+      </p>
+
+      <p>
+        But Eilish doesn’t listen. And besides, how can she leave Larry? He could come back at any time, she continues insisting – despite all evidence to the contrary. But an announcement Eilish is shocked by: conscription for all men sixteen and above. Mark has been conscripted. She must get him out of Ireland.
+      </p>
+
+      <p>
+        This hint to violence shapes the rest of Lynch’s text; the seemingly subtle acts of fascism are giving way to the loud and braggadocious guns of war. Rebels are gathering in the capital, threatening not only the fabric of society but the bricks and mortar of their home.
+      </p>
+
+      <p>
+        Observing these transitions: from peace to war, from calm seas to stormy weather, and from union to suspicion, Lynch achieves in Prophet Song the sense that what we fear most, and what we see overseas or abroad, as something that “won’t happen to us” – very well could.
+      </p>
+
+      <p>
+        Eilish’s character is so complex, in that she is at once brave and determined, but equally fearful and cowering, barely able to keep her kids around her and safe. Placing her story at the centre of this further speaks to that mollification of fear we go through when we see storms on the horizon, or war in far-flung place.
+      </p>
+
+      <p>
+        We deny, deny, and deny until one day the bombs are dropping outside our doors, and the days, months, and years of pretence are crumbling like the house around you.
+      </p>
+
+      <p>
+        Prophet Song is stylish in its clipped and un-punctuated sentences, where dialogue and descriptions butt into each other; Lynch matches form with content to elevate his characters and story, and compared to other winners of the Booker Prize, is not an obviously poor choice.
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    function goToWriting() {
+      localStorage.setItem('openPage', 'writing');
+    }
+  </script>
+
+</body>
+</html>
