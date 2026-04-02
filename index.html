@@ -55,10 +55,6 @@
     grid-template-rows: repeat(12, 1fr);
     background-color: var(--bg-poster);
     overflow: hidden; 
-    
-    /* 🛠️ UPDATED: Shifted from a heavy 8px border to a razor-thin trim */
-    border-left: 1.5px solid var(--nosebleed-red);
-    padding-left: 40px;
   }
 
   /* ATMOSPHERIC DUO-TONE BLEED */
@@ -209,13 +205,10 @@
     margin-bottom: 5px;
     transform: scaleY(1.15);
     transform-origin: bottom;
-    transition: opacity 0.6s var(--ease), transform 0.3s var(--ease);
+    transition: opacity 0.6s var(--ease);
     pointer-events: auto; 
     display: inline-block;
-  }
-
-  .main-title:hover {
-    transform: scaleY(1.2) scaleX(1.02);
+    /* 🛠️ REMOVED: Scale effect on hover */
   }
 
   .sub-title {
@@ -227,13 +220,10 @@
     margin-bottom: 20px;
     transform: scaleY(1.1);
     transform-origin: bottom;
-    transition: opacity 0.6s var(--ease), transform 0.3s var(--ease);
+    transition: opacity 0.6s var(--ease);
     pointer-events: auto;
     display: inline-block;
-  }
-
-  .sub-title:hover {
-    transform: scaleY(1.2) scaleX(1.02);
+    /* 🛠️ REMOVED: Scale effect on hover */
   }
 
   .main-nav {
@@ -361,7 +351,7 @@
     .sub-title { font-size: 22px; }
     .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 6; }
     .writing-grid { grid-template-columns: 1fr; }
-    .canvas { border-left-width: 1.5px; padding-left: 20px; width: 96vw; height: 92vh; } 
+    .canvas { width: 96vw; height: 92vh; } 
   }
 </style>
 </head>
