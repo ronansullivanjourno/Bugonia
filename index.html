@@ -97,38 +97,49 @@
   .canvas::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%); opacity: 0.12; mix-blend-mode: multiply; }
   
   /* ==========================================
-     ASTEROID SHARDS (SANDWICHED IN MIDDLE)
+     ASTEROID SHARDS (TRUE MOVEMENT)
      ========================================== */
   .geo-shard { 
     position: absolute; 
     opacity: var(--current-opacity); 
-    z-index: 1; /* Sits above canvas bg, but below hero image and boxes */
+    z-index: 1; 
     pointer-events: none; 
     transition: opacity 1.2s var(--ease); 
+    left: -300px; /* Start far off-screen left */
   }
   .green-shard { background-color: var(--pistachio); }
   .red-shard { background-color: var(--nosebleed-red); }
   
-  /* ASTEROID TRAJECTORIES (Full Canvas Width) */
-  .drift-fast { animation: driftAcross 15s linear infinite, spinShard 10s linear infinite; }
-  .drift-med { animation: driftAcross 25s linear infinite, spinShard 20s linear infinite reverse; }
-  .drift-slow { animation: driftAcross 40s linear infinite, spinShard 35s linear infinite; }
+  /* Separate animation properties so they don't override each other */
+  .drift-fast { animation: driftAcross 18s linear infinite; }
+  .drift-med { animation: driftAcross 30s linear infinite; }
+  .drift-slow { animation: driftAcross 45s linear infinite; }
   
-  /* Starting Heights and Polygon Shapes */
-  .p1 { width: 120px; height: 100px; top: 15%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); animation-delay: -2s; }
-  .p2 { width: 60px; height: 60px; top: 65%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); animation-delay: -10s; }
-  .p3 { width: 80px; height: 80px; top: 40%; clip-path: polygon(0 0, 100% 30%, 50% 100%); animation-delay: -5s; }
-  .p4 { width: 140px; height: 90px; top: 5%; clip-path: polygon(10% 10%, 90% 20%, 60% 80%); animation-delay: -15s; }
-  .p5 { width: 50px; height: 70px; top: 80%; clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%); animation-delay: -12s; }
-  .p6 { width: 100px; height: 100px; top: 30%; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation-delay: -22s;}
+  .spin-clockwise { animation: spinShard 12s linear infinite; }
+  .spin-counter { animation: spinShardRev 20s linear infinite; }
 
+  /* Individual placements and clip paths */
+  .p1 { width: 120px; height: 100px; top: 10%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); animation-delay: -2s; }
+  .p2 { width: 60px; height: 60px; top: 65%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); animation-delay: -15s; }
+  .p3 { width: 80px; height: 80px; top: 35%; clip-path: polygon(0 0, 100% 30%, 50% 100%); animation-delay: -7s; }
+  .p4 { width: 140px; height: 90px; top: 5%; clip-path: polygon(10% 10%, 90% 20%, 60% 80%); animation-delay: -25s; }
+  .p5 { width: 50px; height: 70px; top: 80%; clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%); animation-delay: -10s; }
+  .p6 { width: 100px; height: 100px; top: 25%; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation-delay: -32s;}
+
+  /* Physical translation moving from left to right */
   @keyframes driftAcross { 
-    0% { transform: translateX(-200px); } 
-    100% { transform: translateX(calc(96vw + 200px)); } 
+    0% { left: -300px; } 
+    100% { left: calc(100% + 300px); } 
   }
+  
+  /* Rotation isolated to transform */
   @keyframes spinShard { 
     0% { transform: rotate(0deg); } 
     100% { transform: rotate(360deg); } 
+  }
+  @keyframes spinShardRev { 
+    0% { transform: rotate(360deg); } 
+    100% { transform: rotate(0deg); } 
   }
   
   /* ==========================================
@@ -150,7 +161,7 @@
     pointer-events: auto; 
     cursor: default;
     filter: grayscale(100%) contrast(160%) brightness(100%); 
-    z-index: 12; /* Placed directly above shifting asteroids */
+    z-index: 12; 
   }
   
   .hero-drip:hover { transform: none; }
@@ -195,12 +206,12 @@
   .sub-title:hover { color: var(--nosebleed-red); transform: scaleY(1.15); }
   
   /* ==========================================
-     FEATURED STORY BOX (TOP RIGHT LOCKED WITH BORDER)
+     FEATURED STORY BOX
      ========================================== */
   .featured-story-box {
     grid-column: 9 / 13;
     grid-row: 1 / 9; 
-    z-index: 30; /* High index protects text from asteroids */
+    z-index: 30; 
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -308,12 +319,12 @@
 
   <div class="canvas" id="main-canvas">
     
-    <div class="geo-shard green-shard p1 drift-med"></div>
-    <div class="geo-shard red-shard p2 drift-slow"></div>
-    <div class="geo-shard green-shard p3 drift-fast"></div>
-    <div class="geo-shard red-shard p4 drift-med"></div>
-    <div class="geo-shard green-shard p5 drift-slow"></div>
-    <div class="geo-shard red-shard p6 drift-fast"></div>
+    <div class="geo-shard green-shard p1 drift-med spin-clockwise"></div>
+    <div class="geo-shard red-shard p2 drift-slow spin-counter"></div>
+    <div class="geo-shard green-shard p3 drift-fast spin-clockwise"></div>
+    <div class="geo-shard red-shard p4 drift-med spin-clockwise"></div>
+    <div class="geo-shard green-shard p5 drift-slow spin-counter"></div>
+    <div class="geo-shard red-shard p6 drift-fast spin-clockwise"></div>
 
     <div class="hero-drip-container">
       <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
