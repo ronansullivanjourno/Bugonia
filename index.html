@@ -75,10 +75,9 @@
     transition: color 0.2s, transform 0.2s;
   }
 
-  /* HOVER STATE: Turns pistachio green and scales up slightly more (1.2) */
+  /* HOVER STATE: Stays black but scales up safely (1.13) */
   .nav-links button:hover {
-    color: var(--pistachio);
-    transform: scaleY(1.2);
+    transform: scaleY(1.13);
   }
 
   /* ACTIVE STATE: Turns red when on the page */
@@ -133,7 +132,7 @@
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); 
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
     pointer-events: auto; 
-    cursor: pointer; 
+    cursor: default; /* Removed pointer cursor since navigation is disabled */
     filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); 
   }
   
@@ -191,7 +190,7 @@
     <div class="geo-shard green-shard p5 drift-slow"></div>
     
     <div class="hero-drip-container">
-      <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');" onclick="openPage('writing')"></div>
+      <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
     </div>
     
     <div class="masthead">
