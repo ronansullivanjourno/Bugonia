@@ -145,23 +145,23 @@
     height: 100%;
     background-color: var(--nosebleed-red);
     opacity: var(--current-opacity);
-    background-size: cover;
     
-    /* 1. FORCE THE TOP OF THE PHOTO UP TO THE TOP OF THE SHARD */
-    background-position: center top; 
+    /* SCALE UP IMAGE & PUSH DOWN TO LOPOFF HEADROOM */
+    background-size: 130%;
+    background-position: 50% 5%; 
     
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%);
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
     pointer-events: auto;
     cursor: pointer;
     
-    /* 2. HEAVY DARKS, RICH CONTRAST, ZERO BLANCHING */
+    /* VICIOUS CONTRAST PULL & DESATURATION */
     filter: 
       grayscale(100%) 
-      contrast(320%)    
+      contrast(380%)    
       sepia(100%)      
-      hue-rotate(-50deg) 
-      brightness(85%);  
+      hue-rotate(-52deg) 
+      brightness(75%);  
   }
 
   .hero-drip:hover {
@@ -173,7 +173,6 @@
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    /* Layer 1: Sickly color bleed on shadows */
     background-color: var(--pistachio);
     opacity: 0.15;
     mix-blend-mode: color-burn;
@@ -184,7 +183,6 @@
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     z-index: 1;
-    /* Layer 2: Aggressive color wash on highlights */
     background-color: var(--nosebleed-red);
     opacity: 0.22;
     mix-blend-mode: overlay;
