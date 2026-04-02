@@ -18,8 +18,8 @@
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
     
-    /* Dynamic opacity variables controlled via JS */
-    --current-opacity: 0.65; 
+    /* Dynamic opacity variables controlled via JS - CRANKED UP TO 0.85 */
+    --current-opacity: 0.85; 
   }
 
   body {
@@ -380,8 +380,8 @@
         canvas.classList.remove('shifted');
         document.getElementById('nav-home').classList.add('active-nav');
         
-        // Return opacity to bold 0.65 on landing page
-        document.documentElement.style.setProperty('--current-opacity', '0.65');
+        // Return opacity to bold 0.85 on landing page
+        document.documentElement.style.setProperty('--current-opacity', '0.85');
       } else {
         canvas.classList.add('shifted');
         document.getElementById('nav-' + pageId).classList.add('active-nav');
