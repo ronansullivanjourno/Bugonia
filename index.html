@@ -50,7 +50,7 @@
     background-color: var(--bg-poster);
     border-bottom: 2px solid var(--black);
     display: flex;
-    justify-content: center; /* Centered the nav since name was removed */
+    justify-content: center; 
     align-items: center;
     padding: 20px 40px;
     position: relative;
@@ -116,14 +116,14 @@
   
   @keyframes floatingPrimary { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
   
-  /* FIXED IMAGE POSITION: Scaled up to cut headroom and anchored to the top */
+  /* FIXED IMAGE POSITION: Centered width, anchored near the top (5%) to keep face visible */
   .hero-drip { 
     width: 100%; 
     height: 100%; 
     background-color: var(--nosebleed-red); 
     opacity: var(--current-opacity); 
     background-size: 135%; 
-    background-position: 50% 0%; 
+    background-position: 50% 5%; 
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); 
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
     pointer-events: auto; 
