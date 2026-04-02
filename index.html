@@ -50,20 +50,11 @@
     background-color: var(--bg-poster);
     border-bottom: 2px solid var(--black);
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centered the nav since name was removed */
     align-items: center;
     padding: 20px 40px;
     position: relative;
     z-index: 100;
-  }
-
-  .nav-brand {
-    font-size: 14px;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: var(--black);
-    text-decoration: none;
-    letter-spacing: 1px;
   }
 
   .nav-links {
@@ -90,12 +81,12 @@
   }
 
   /* ==========================================
-     ARTISTIC CANVAS (RE-PROPORTIONED)
+     ARTISTIC CANVAS
      ========================================== */
   .canvas { 
     width: 96vw; 
     max-width: 1400px; 
-    height: calc(100vh - 65px); /* Perfectly fills the space below the header without overflow */
+    height: calc(100vh - 65px); 
     position: relative; 
     display: grid; 
     grid-template-columns: repeat(12, 1fr); 
@@ -111,7 +102,6 @@
   .drift-fast { animation: driftRight 18s linear infinite, spinShard 20s linear infinite; }
   .drift-slow { animation: driftLeft 30s linear infinite, spinShard 35s linear infinite reverse; }
   
-  /* Adjusted shard placements to clear top margins */
   .p1 { width: 120px; height: 100px; top: 15%; left: 5%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); }
   .p2 { width: 60px; height: 60px; top: 40%; left: 25%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); }
   .p3 { width: 150px; height: 130px; top: 65%; left: 45%; clip-path: polygon(0 0, 100% 30%, 85% 100%, 10% 85%); }
@@ -122,13 +112,25 @@
   @keyframes driftLeft { 0% { transform: translateX(calc(96vw + 200px)); } 100% { transform: translateX(-200px); } }
   @keyframes spinShard { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   
-  /* Pushed the blob down slightly from row 2 to prevent any head clipping */
   .hero-drip-container { grid-column: 6 / 10; grid-row: 3 / 8; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; animation: floatingPrimary 8s ease-in-out infinite; }
   
   @keyframes floatingPrimary { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
   
-  /* FIXED IMAGE POSITION: scaled down slightly and nudged vertically to preserve head visibility */
-  .hero-drip { width: 100%; height: 100%; background-color: var(--nosebleed-red); opacity: var(--current-opacity); background-size: 110%; background-position: 50% 5%; clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); pointer-events: auto; cursor: pointer; filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); }
+  /* FIXED IMAGE POSITION: Scaled up to cut headroom and anchored to the top */
+  .hero-drip { 
+    width: 100%; 
+    height: 100%; 
+    background-color: var(--nosebleed-red); 
+    opacity: var(--current-opacity); 
+    background-size: 135%; 
+    background-position: 50% 0%; 
+    clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); 
+    transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
+    pointer-events: auto; 
+    cursor: pointer; 
+    filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); 
+  }
+  
   .hero-drip:hover { transform: scale(1.05) rotate(-2deg); }
   .hero-drip::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--pistachio); opacity: 0.15; mix-blend-mode: color-burn; }
   .hero-drip::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: var(--nosebleed-red); opacity: 0.22; mix-blend-mode: overlay; }
@@ -137,7 +139,6 @@
   .main-title { font-size: 110px; font-weight: 900; letter-spacing: -7px; line-height: 0.75; text-transform: uppercase; color: var(--black); margin-bottom: 5px; transform: scaleY(1.15); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
   .sub-title { font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; color: var(--nosebleed-red); margin-bottom: 20px; transform: scaleY(1.1); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
   
-  /* Pushed the text pages down to row 3 to prevent header overlapping/clipping */
   .section-content { grid-column: 2 / 12; grid-row: 3 / 8; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s var(--ease); display: flex; flex-direction: column; justify-content: center; }
   .section-content.active { opacity: 1; pointer-events: auto; }
   .section-title { font-size: 55px; font-weight: 900; text-transform: uppercase; letter-spacing: -3px; margin-bottom: 20px; transform: scaleY(1.1); transform-origin: left; color: var(--nosebleed-red); display: inline-block; }
@@ -150,7 +151,6 @@
   .editorial-link { font-size: 13px; font-weight: 900; color: var(--black); text-decoration: none; text-transform: uppercase; display: block; padding: 5px 0; transition: transform 0.2s, color 0.2s; }
   .editorial-link:hover { color: var(--pistachio); transform: scaleY(1.3) translateX(5px); transform-origin: top; }
   
-  /* Kept transition scale effects aligned with new positioning */
   .canvas.shifted .hero-drip { transform: scale(0.5) translateY(100px) translateX(300px); }
   .canvas.shifted .main-title, .canvas.shifted .sub-title { opacity: 0.03; }
   .red-divider { border-top: 4px solid var(--nosebleed-red); margin-bottom: 20px; }
@@ -162,14 +162,13 @@
     .writing-grid { grid-template-columns: 1fr; } 
     .global-header { padding: 15px 20px; }
     .nav-links { gap: 15px; }
-    .section-content { grid-row: 3 / 9; } /* Gives mobile text more vertical track */
+    .section-content { grid-row: 3 / 9; } 
   }
 </style>
 </head>
 <body>
 
   <header class="global-header">
-    <a href="#" class="nav-brand" onclick="openPage('home')">Ronan Sullivan</a>
     <nav class="nav-links">
       <button onclick="openPage('home')">Home</button>
       <button onclick="openPage('about')">About</button>
