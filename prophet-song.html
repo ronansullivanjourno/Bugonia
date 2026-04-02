@@ -116,7 +116,7 @@
     margin-bottom: 30px;
   }
 
-  /* IMAGE BOXES */
+  /* IMAGE BOXES - UNSETTLING VISUAL FLIP */
   .essay-image-container {
     margin: 40px 0;
     border: 4px solid var(--black);
@@ -128,12 +128,14 @@
     width: 100%;
     height: auto;
     display: block;
-    filter: grayscale(100%) contrast(110%);
-    transition: filter 0.3s;
+    /* Starts in full color with increased contrast */
+    filter: grayscale(0%) contrast(120%);
+    transition: filter 0.4s var(--ease);
   }
 
   .essay-image-container img:hover {
-    filter: grayscale(0%) contrast(100%);
+    /* Desaturates to harsh black and white on hover */
+    filter: grayscale(100%) contrast(150%);
   }
 
   .image-caption {
