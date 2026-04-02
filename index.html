@@ -132,7 +132,7 @@
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); 
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
     pointer-events: auto; 
-    cursor: default; /* Removed pointer cursor since navigation is disabled */
+    cursor: default;
     filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); 
   }
   
@@ -144,6 +144,68 @@
   .main-title { font-size: 110px; font-weight: 900; letter-spacing: -7px; line-height: 0.75; text-transform: uppercase; color: var(--black); margin-bottom: 5px; transform: scaleY(1.15); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
   .sub-title { font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; color: var(--nosebleed-red); margin-bottom: 20px; transform: scaleY(1.1); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
   
+  /* ==========================================
+     OPTION 1: FEATURED STORY TEASER (HOME ONLY)
+     ========================================== */
+  .featured-story-box {
+    grid-column: 9 / 13;
+    grid-row: 9 / 12;
+    z-index: 30;
+    background-color: var(--bg-poster);
+    border: 4px solid var(--black);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: end;
+    margin-bottom: 20px;
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+
+  .featured-story-box .story-label {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--nosebleed-red);
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .featured-story-box .story-title {
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 15px;
+  }
+
+  .featured-story-box .story-link {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--black);
+    text-decoration: none;
+    text-transform: uppercase;
+    align-self: flex-start;
+    transition: transform 0.2s, color 0.2s;
+  }
+
+  .featured-story-box .story-link:hover {
+    color: var(--pistachio);
+    transform: scaleY(1.2) translateX(3px);
+  }
+
+  /* Fade out the box when viewing other pages */
+  .canvas.shifted .featured-story-box {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+  }
+
+  /* ==========================================
+     DYNAMIC SECTIONS
+     ========================================== */
   .section-content { grid-column: 2 / 12; grid-row: 3 / 8; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s var(--ease); display: flex; flex-direction: column; justify-content: center; }
   .section-content.active { opacity: 1; pointer-events: auto; }
   .section-title { font-size: 55px; font-weight: 900; text-transform: uppercase; letter-spacing: -3px; margin-bottom: 20px; transform: scaleY(1.1); transform-origin: left; color: var(--nosebleed-red); display: inline-block; }
@@ -168,6 +230,7 @@
     .global-header { padding: 15px 20px; }
     .nav-links { gap: 15px; }
     .section-content { grid-row: 3 / 9; } 
+    .featured-story-box { grid-column: 2 / 12; grid-row: 10 / 13; margin-bottom: 0; }
   }
 </style>
 </head>
@@ -196,6 +259,14 @@
     <div class="masthead">
       <div><h1 class="main-title">Ronan<br>Sullivan</h1></div>
       <div><h2 class="sub-title">Portfolio</h2></div>
+    </div>
+
+    <div class="featured-story-box">
+      <div>
+        <span class="story-label">Lead Story</span>
+        <h3 class="story-title">Win over Welsh side secures Fenix Trophy play-off place</h3>
+      </div>
+      <a href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank" class="story-link">Read Full Report →</a>
     </div>
 
     <div class="section-content" id="page-about">
