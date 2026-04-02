@@ -13,10 +13,7 @@
   :root {
     --bg-poster: #bcc6cc; /* Cold, clinical glaucous blue-gray */
     --black: #0d0d0d;
-    
-    /* 🛠️ OVERHAULED PISTACHIO FOR READABILITY - DEEPER, RICHER, UNIFORM */
     --pistachio: #5b6e56; /* Cinematic, deep slate-green */
-    
     --nosebleed-red: #7c2230; /* Cinematic deep red */
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
@@ -58,6 +55,9 @@
     grid-template-rows: repeat(12, 1fr);
     background-color: var(--bg-poster);
     overflow: hidden; 
+    
+    /* 🛠️ ADDED: Heavy left border frame in Nosebleed-Red */
+    border-left: 8px solid var(--nosebleed-red);
   }
 
   /* ATMOSPHERIC DUO-TONE BLEED */
@@ -72,7 +72,7 @@
     mix-blend-mode: multiply;
   }
 
-  /* NON-UNIFORM ANGULAR FLOATING SHARDS (Synced with new dark green) */
+  /* NON-UNIFORM ANGULAR FLOATING SHARDS */
   .geo-shard {
     position: absolute;
     opacity: var(--current-opacity);
@@ -198,7 +198,6 @@
     pointer-events: none; 
   }
 
-  /* 🛠️ RESTORED HEADINGS TO SOLID HEAVY BLACK */
   .main-title {
     font-size: 110px;
     font-weight: 900;
@@ -218,7 +217,6 @@
     transform: scaleY(1.2) scaleX(1.02);
   }
 
-  /* SUB-HEADING REMAINS PISTACHIO GREEN (Updated) */
   .sub-title {
     font-size: 32px;
     font-weight: 900;
@@ -289,7 +287,6 @@
     pointer-events: auto;
   }
 
-  /* 🛠️ RESTORED SECTION TITLES TO HEAVY BLACK */
   .section-title {
     font-size: 55px;
     font-weight: 900;
@@ -315,13 +312,13 @@
   }
 
   .category-group {
-    border-top: 4px solid var(--black);
+    /* 🛠️ UPDATED: Thicker, Nosebleed-Red divider for Writing caps */
+    border-top: 4px solid var(--nosebleed-red);
     padding-top: 10px;
   }
 
   .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
   
-  /* SUB-HEADINGS AUTOMATICALLY USE UPDATED LEGIBLE GREEN */
   .cat-title { 
     font-size: 24px; 
     font-weight: 900; 
@@ -355,12 +352,19 @@
   .canvas.shifted .sub-title {
     opacity: 0.03;
   }
+  
+  /* 🛠️ ADDED: Heavy Red top-bar dividers for About/Contact flow */
+  .red-divider {
+    border-top: 4px solid var(--nosebleed-red);
+    margin-bottom: 20px;
+  }
 
   @media (max-width: 768px) {
     .main-title { font-size: 55px; letter-spacing: -2px; }
     .sub-title { font-size: 22px; }
     .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 6; }
     .writing-grid { grid-template-columns: 1fr; }
+    .canvas { border-left-width: 4px; } /* Thinner border on mobile */
   }
 </style>
 </head>
@@ -390,6 +394,7 @@
     </div>
 
     <div class="section-content" id="page-about">
+      <div class="red-divider"></div>
       <div><h2 class="section-title">About</h2></div>
       <div style="font-size: 24px; font-weight: 900; line-height: 1.3; max-width: 650px; letter-spacing: -0.5px;">
         I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing, bridging the gap between grassroots triumphs and professional artistry.
@@ -426,6 +431,7 @@
     </div>
 
     <div class="section-content" id="page-contact">
+      <div class="red-divider"></div>
       <div><h2 class="section-title">Contact</h2></div>
       <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">ronansullivan@hotmail.co.uk</a>
       <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">View LinkedIn Profile →</a>
