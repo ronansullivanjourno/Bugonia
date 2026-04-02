@@ -92,7 +92,7 @@
   }
 
   .article-title {
-    font-size: 60px;
+    font-size: 55px;
     font-weight: 900;
     letter-spacing: -3px;
     line-height: 0.85;
@@ -121,17 +121,32 @@
     color: var(--black);
   }
 
-  .article-body p:first-of-type::first-letter {
-    font-size: 50px;
+  /* IMAGE STYLING */
+  .article-image-box {
+    margin: 35px 0;
+    border: 2px solid var(--black);
+    background-color: var(--black);
+  }
+
+  .article-image-box img {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  .article-image-box span {
+    display: block;
+    padding: 10px;
+    font-size: 11px;
     font-weight: 900;
-    float: left;
-    line-height: 40px;
-    padding-right: 8px;
-    color: var(--nosebleed-red);
+    text-transform: uppercase;
+    background-color: var(--bg-poster);
+    color: var(--black);
+    border-top: 2px solid var(--black);
   }
 
   @media (max-width: 768px) {
-    .article-title { font-size: 40px; }
+    .article-title { font-size: 35px; }
     .article-container { padding: 20px; width: 95vw; }
   }
 </style>
@@ -141,15 +156,15 @@
   <header class="global-header">
     <nav class="nav-links">
       <a href="index.html">Home</a>
-      <a href="index.html?page=about">About</a>
-      <a href="index.html?page=writing" class="active">Writing</a>
-      <a href="index.html?page=contact">Contact</a>
+      <a href="index.html?page=about&state=shifted">About</a>
+      <a href="index.html?page=writing&state=shifted" class="active">Writing</a>
+      <a href="index.html?page=contact&state=shifted">Contact</a>
     </nav>
   </header>
 
   <main class="article-container">
-    <span class="article-tag">Arts & Film</span>
-    <h1 class="article-title">Dissecting the<br>French New Wave</h1>
+    <span class="article-tag">Posted on 1st Nov 2024 by Ronan Sullivan</span>
+    <h1 class="article-title">Cleo From 5 to 7 – Agnes Varda’s troubled bodies and Parisian cobblestones</h1>
     
     <div class="article-meta">
       <span>By Ronan Sullivan</span>
@@ -157,8 +172,55 @@
     </div>
 
     <div class="article-body">
-      <p>Agnès Varda's masterful exploration of existential dread and the female gaze remains as sharp and visually striking today as it did in 1962. We follow Cléo, a pop singer, across Paris in real-time as she awaits the results of a biopsy.</p>
-      <p>Our essay argues that Varda systematically deconstructs the objective male view of women, replacing it with Cléo's internal, transformative experience of the city itself—a profound shift from object to subject that defined a generation.</p>
+      
+      <div class="article-image-box">
+        <img src="Cleo From 5 to 7.jpg" alt="Corinne Marchand as Cleo">
+        <span>Corinne Marchand as Cleo in Cleo From 5 to 7.</span>
+      </div>
+
+      <p>Dorothée is naked in the centre of the room in Agnès Varda’s Cleo From 5 to 7, enveloped by clay sculptures: multiple simulacrums and bastardised versions of herself, created by a crowd of observing artists. Like a hall of circus mirrors.</p>
+      
+      <p>That relationship between viewer and viewee; audience and performer; crowd versus individual is played upon here, feeding into and summating the tension and conflict at the film’s core: image and observation. Using Florence “Cleo” [Surname] as the site for these questions and debates, Varda shapes a film interrogative of the image and simulacra, commenting on laced-in contradictions of observation and observing in the female body.</p>
+      
+      <p>With the spectre of death hanging over Corinne Marchand’s Cleo (her hours from five pm to six-thirty are spent waiting on test results for cancer) this dynamic is all the more pertinent for her: she is a singer visibly budding for attention. In a local cafe, when she puts a single of her on the jukebox, no one cares, or notices, and in fact complains about the racket of her voice.</p>
+      
+      <p>This is in Cafe Dome: a scene zeroing on phenomena of being observed. Images of cafegoers, staring down the camera’s barrel (representing Cleo’s perspective) are overwhelming and scrutinising; the haggard men, tired women, and roving children’s faces and eyes and voices and bodies are oppressive and the world Cleo is moving in seems suddenly too full. The technique of using the handheld camera as Cleo’s eyes, so that, as she walks down these Parisian streets, all manner of people stare directly at her, is discomfiting: the audience too feels observed, scrutinised, and judged.</p>
+
+      <div class="article-image-box">
+        <img src="Cleo From 5 to 7 Dorothee.jpg" alt="Dorothée Blanck as Dorothée">
+        <span>Dorothée Blanck as Dorothée.</span>
+      </div>
+
+      <p>This busyness Varda creates is complemented by conversations Cleo eavesdrops in on throughout her hour-and-a-half. In an earlier scene in a cafe a woman refuses a man’s ultimatum to sleep with him or be left alone; on a tram – nearer Cleo From 5 to 7’s end – another anecdote the audience is let in on. So lived-in, this Paris feels at once about the effect of being observed, but also of observing itself. Paris was brimming with life, but is now overspilling, pouring out of a now-too-small container.</p>
+      
+      <p>Varda’s synthesis and emphasis on the scrutiny of the body, and the onus on the public of perceiving said body in their minds is best represented in the art studio, where Cleo’s friend Dorothée stands naked in the centre of the room, vulnerable, allowing these simulacrums and malformed versions of her body to be created by an audience in multiplicity.</p>
+      
+      <p>With this vulnerability and – to degrees – disownership of image Varda shows Cleo cannot control how people perceive her: she is merely an outline or vessel people pour their own values and concepts into. For someone in the arts and a visible role, impinging of being observed: this is a reckoning for her.</p>
+
+      <div class="article-image-box">
+        <img src="Cleo From 5 to 7 Agnes Varda.webp" alt="Cleo From 5 to 7 from The Criterion Collection">
+        <span>Cleo From 5 to 7 from The Criterion Collection.</span>
+      </div>
+
+      <p>This idea speaks to degrees of passivity in Cleo: even if she feels agency in observing and being observed she is still preoccupied with image, inherent in which is the idea of being observed and thus an object in the subject-object relationship. Laced within this is the cancer diagnosis the tarot reader seems sure of a bleak prognosis about.</p>
+      
+      <p>Under the authority of image and submissive to the whims or degradations of her body Cleo is exhibiting a passivity adherent to the gendered dichotomies in Helene Cixous’ The Newly Born Woman: Where is she? Activity/passivity Sun/Moon Culture/Nature Logos/Pathos. Form, convex, step, advance, semen, progress. Matter, concave, ground—where steps are taken, holding- and dumping ground. Man/ Woman Opposition, conflict, sublation, return. Master/Slave Violence. Repression.</p>
+      
+      <p>Applying the themes of Cixous to Cleo From 5 to 7 speaks to the duologies and contradictions and boundaries Cleo operates in, and how some of these are fading away – particularly those associated with the body.</p>
+      
+      <p>Cleo is haunted by images of street performers, who perform violent acts against the body: one pierces his bicep with a thick metal rod, urging the audience to examine it closely; another swallows live frogs, one after the other, before gushing them out alive, with gallons of water. The sights of these men, acting in unnatural ways, violating the laws of the body, is a corollary to the violence Cleo fears inflicted on her own body: the potential of her cancer, that her body is dying, riddled by this disease.</p>
+      
+      <p>These street performers also pertain to that accession of observation, where one’s body in a physical and public space is subject to interrogation and the mores of the public at large.</p>
+      
+      <p>This degradation of the body’s image and physical inviolability speaks to the postmodern concerns about visual media and a metacommentary on the ultimate observer, film – or the camera itself. Dangerous and unpredictable, one can reflect on ourselves observing these strangers in the streets as they scrutinise the camera, or Cleo, realising that we and they are at once the same. We exist then in an endless simulacrum of reality, where the lines of body and selves and the lines between audience and performer grow ever thinned, and ever more blurred.</p>
+
+      <p>Varda, by playing with this dynamic of observing versus being observed, is thrusting into our faces the contradictions of existing as a physical entity in the world. Wow we are willing performers, desperate to be noticed, but just as equally desperate to notice others – to both emphasise and reduce our own significance.</p>
+      
+      <p>This circularity of recognition is echoic of George Hegel’s “Master-Slave” dialectic in his The Phenomenology of Spirit, where an endless struggle of un-sated self-recognition occurs. So while the element of contradictions in recognition and self-consciousness persist in Cleo From 5 to 7, Varda alters it somewhat. Those people on the Parisian streets are merely conduits through which Cleo emphasises and denotes her self-image. She is not master or slave, but both.</p>
+      
+      <p>Cleo’s cancer and the street performers drag us to the concept of the body’s perfidy: how it betrays us, and can’t be trusted to obey the laws we expect it to.</p>
+      
+      <p>Varda sculpts a film bastardising itself, us, and the version of reality we err between trusting and suspecting. Cleo From 5 to 7 is complex and provides no simple answers, only series of questions, self-reflecting, like a hall of mirrors, or a room of near-identikit statues, all pointing at each other in earnest suspicions of truth.</p>
     </div>
   </main>
 
