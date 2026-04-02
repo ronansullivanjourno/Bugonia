@@ -195,41 +195,43 @@
     pointer-events: none; 
   }
 
+  /* HEADINGS TO NOSEBLEED RED */
   .main-title {
     font-size: 110px;
     font-weight: 900;
     letter-spacing: -7px;
     line-height: 0.75;
     text-transform: uppercase;
-    color: var(--black);
+    color: var(--nosebleed-red);
     margin-bottom: 5px;
     transform: scaleY(1.15);
     transform-origin: bottom;
-    transition: opacity 0.6s var(--ease), color 0.3s;
-    pointer-events: auto; /* Re-enabled so you can hover on the title! */
+    transition: opacity 0.6s var(--ease), transform 0.3s var(--ease);
+    pointer-events: auto; 
+    display: inline-block;
   }
 
-  /* 🛠️ ADDED HOVER TO HEADINGS */
   .main-title:hover {
-    color: var(--nosebleed-red);
+    transform: scaleY(1.2) scaleX(1.02);
   }
 
+  /* SUB-HEADING TO PISTACHIO */
   .sub-title {
     font-size: 32px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -1px;
-    color: var(--black);
+    color: var(--pistachio);
     margin-bottom: 20px;
-    opacity: 0.85;
     transform: scaleY(1.1);
     transform-origin: bottom;
-    transition: opacity 0.6s var(--ease), color 0.3s;
+    transition: opacity 0.6s var(--ease), transform 0.3s var(--ease);
     pointer-events: auto;
+    display: inline-block;
   }
 
   .sub-title:hover {
-    color: var(--pistachio);
+    transform: scaleY(1.2) scaleX(1.02);
   }
 
   .main-nav {
@@ -253,17 +255,13 @@
     display: inline-block;
   }
 
-  /* HOVER INTERACTION TO CYCLE STYLISTIC COLORS */
+  /* HOVER INTERACTION LOCKED TO DARK NOSEBLEED RED */
   .nav-item:hover {
     color: var(--nosebleed-red);
     transform: scaleY(1.4) translateY(5px); 
   }
-  
-  .nav-item:nth-child(2n):hover {
-    color: var(--pistachio);
-  }
 
-  /* ACTIVE STATE COLORS */
+  /* ACTIVE STATE COLORS (NO UNDERLINE ON HOME) */
   .nav-item.active-nav {
     color: var(--nosebleed-red);
     transform: scaleY(1.2);
@@ -288,6 +286,7 @@
     pointer-events: auto;
   }
 
+  /* SECTION TITLES TO NOSEBLEED RED */
   .section-title {
     font-size: 55px;
     font-weight: 900;
@@ -296,12 +295,13 @@
     margin-bottom: 20px;
     transform: scaleY(1.1);
     transform-origin: left;
-    transition: color 0.3s;
+    color: var(--nosebleed-red);
+    transition: transform 0.3s var(--ease);
+    display: inline-block;
   }
 
-  /* 🛠️ ADDED HOVER TO SECTION HEADINGS */
   .section-title:hover {
-    color: var(--nosebleed-red);
+    transform: scaleY(1.2) scaleX(1.02);
   }
 
   /* WRITING GRID */
@@ -317,7 +317,16 @@
   }
 
   .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
-  .cat-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 10px; }
+  
+  /* 🛠️ APPLIED PISTACHIO TO SUB-HEADINGS ON OTHER PAGES */
+  .cat-title { 
+    font-size: 24px; 
+    font-weight: 900; 
+    text-transform: uppercase; 
+    letter-spacing: -1px; 
+    margin-bottom: 10px; 
+    color: var(--pistachio); 
+  }
   
   .editorial-link {
     font-size: 13px;
@@ -367,8 +376,8 @@
     </div>
 
     <div class="masthead">
-      <h1 class="main-title">Ronan<br>Sullivan</h1>
-      <h2 class="sub-title">Portfolio</h2>
+      <div><h1 class="main-title">Ronan<br>Sullivan</h1></div>
+      <div><h2 class="sub-title">Portfolio</h2></div>
       <nav class="main-nav">
         <button class="nav-item" id="nav-home" onclick="openPage('home')">Home</button>
         <button class="nav-item" id="nav-about" onclick="openPage('about')">About</button>
@@ -378,14 +387,14 @@
     </div>
 
     <div class="section-content" id="page-about">
-      <h2 class="section-title">About</h2>
+      <div><h2 class="section-title">About</h2></div>
       <div style="font-size: 24px; font-weight: 900; line-height: 1.3; max-width: 650px; letter-spacing: -0.5px;">
         I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing, bridging the gap between grassroots triumphs and professional artistry.
       </div>
     </div>
 
     <div class="section-content" id="page-writing">
-      <h2 class="section-title">Writing</h2>
+      <div><h2 class="section-title">Writing</h2></div>
       <div class="writing-grid">
         <div class="category-group">
           <span class="cat-label">Section 01</span>
@@ -414,7 +423,7 @@
     </div>
 
     <div class="section-content" id="page-contact">
-      <h2 class="section-title">Contact</h2>
+      <div><h2 class="section-title">Contact</h2></div>
       <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">ronansullivan@hotmail.co.uk</a>
       <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scaleY(1.3)'" onmouseout="this.style.transform='scaleY(1)'">View LinkedIn Profile →</a>
     </div>
