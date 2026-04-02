@@ -32,16 +32,6 @@
     overflow: hidden; 
   }
 
-  body::before { 
-    content: ''; 
-    position: fixed; 
-    top: 0; left: 0; width: 100%; height: 100%; 
-    opacity: 0.5; 
-    pointer-events: none; 
-    z-index: 50; 
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); 
-  }
-
   /* ==========================================
      UNIVERSAL HEADER
      ========================================== */
@@ -75,32 +65,41 @@
     transition: color 0.2s, transform 0.2s;
   }
 
-  /* HOVER STATE: Stays black but scales up safely (1.13) */
-  .nav-links button:hover {
-    transform: scaleY(1.13);
-  }
-
-  /* ACTIVE STATE: Turns red when on the page */
-  .nav-links button.active {
-    color: var(--nosebleed-red);
-  }
+  .nav-links button:hover { transform: scaleY(1.13); }
+  .nav-links button.active { color: var(--nosebleed-red); }
 
   /* ==========================================
-     ARTISTIC CANVAS
+     ARTISTIC CANVAS (HARD-GRID ENABLED)
      ========================================== */
   .canvas { 
     width: 96vw; 
     max-width: 1400px; 
-    height: calc(100vh - 65px); 
+    height: calc(100vh - 105px); /* Adjusted for canvas + header + ticker */
     position: relative; 
     display: grid; 
     grid-template-columns: repeat(12, 1fr); 
     grid-template-rows: repeat(12, 1fr); 
     background-color: var(--bg-poster); 
     overflow: hidden; 
+    border: 4px solid var(--black); /* Heavy external border */
+    margin-top: 5px;
   }
 
-  .canvas::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%); opacity: 0.18; mix-blend-mode: multiply; }
+  /* Hard-grid raw layout lines */
+  .canvas::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc((100% / 12) * 8); /* Hard line separating portrait from features */
+    width: 4px;
+    height: 100%;
+    background-color: var(--black);
+    z-index: 5;
+  }
+
+  .canvas::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%); opacity: 0.12; mix-blend-mode: multiply; }
+  
+  /* SHARDS */
   .geo-shard { position: absolute; opacity: var(--current-opacity); z-index: 1; pointer-events: none; transition: opacity 1.2s var(--ease); }
   .green-shard { background-color: var(--pistachio); }
   .red-shard { background-color: var(--nosebleed-red); }
@@ -110,14 +109,14 @@
   .p1 { width: 120px; height: 100px; top: 15%; left: 5%; clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%); }
   .p2 { width: 60px; height: 60px; top: 40%; left: 25%; clip-path: polygon(50% 0%, 100% 100%, 0% 60%); }
   .p3 { width: 150px; height: 130px; top: 65%; left: 45%; clip-path: polygon(0 0, 100% 30%, 85% 100%, 10% 85%); }
-  .p4 { width: 40px; height: 50px; top: 75%; left: 80%; clip-path: polygon(10% 10%, 90% 20%, 100% 90%, 20% 100%); }
-  .p5 { width: 180px; height: 140px; top: 10%; left: 75%; clip-path: polygon(30% 0%, 90% 10%, 100% 70%, 0% 100%); }
+  .p4 { width: 40px; height: 50px; top: 75%; left: 60%; clip-path: polygon(10% 10%, 90% 20%, 100% 90%, 20% 100%); }
   
   @keyframes driftRight { 0% { transform: translateX(-200px); } 100% { transform: translateX(calc(96vw + 200px)); } }
   @keyframes driftLeft { 0% { transform: translateX(calc(96vw + 200px)); } 100% { transform: translateX(-200px); } }
   @keyframes spinShard { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   
-  .hero-drip-container { grid-column: 6 / 10; grid-row: 3 / 8; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; animation: floatingPrimary 8s ease-in-out infinite; }
+  /* HERO IMAGE */
+  .hero-drip-container { grid-column: 2 / 7; grid-row: 3 / 8; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; animation: floatingPrimary 8s ease-in-out infinite; }
   
   @keyframes floatingPrimary { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(3deg); } 100% { transform: translateY(0px) rotate(0deg); } }
   
@@ -125,39 +124,34 @@
     width: 100%; 
     height: 100%; 
     background-color: var(--nosebleed-red); 
-    opacity: var(--current-opacity); 
+    opacity: 0.85; 
     background-size: 150%; 
     background-position: 30% 65%; 
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%); 
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease); 
     pointer-events: auto; 
     cursor: default;
-    filter: grayscale(100%) contrast(215%) sepia(100%) hue-rotate(-42deg) brightness(104%); 
+    /* TONED DOWN GLOW: Lowered contrast and removed bright film burns */
+    filter: grayscale(100%) contrast(150%) sepia(30%) brightness(100%); 
   }
   
   .hero-drip:hover { transform: scale(1.05) rotate(-2deg); }
-  .hero-drip::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--pistachio); opacity: 0.15; mix-blend-mode: color-burn; }
-  .hero-drip::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: var(--nosebleed-red); opacity: 0.22; mix-blend-mode: overlay; }
   
-  .masthead { grid-column: 1 / 13; grid-row: 8 / 13; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 20px; pointer-events: none; }
-  .main-title { font-size: 110px; font-weight: 900; letter-spacing: -7px; line-height: 0.75; text-transform: uppercase; color: var(--black); margin-bottom: 5px; transform: scaleY(1.15); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
-  .sub-title { font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; color: var(--nosebleed-red); margin-bottom: 20px; transform: scaleY(1.1); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
+  .masthead { grid-column: 1 / 9; grid-row: 9 / 13; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; pointer-events: none; }
+  .main-title { font-size: 100px; font-weight: 900; letter-spacing: -6px; line-height: 0.75; text-transform: uppercase; color: var(--black); margin-bottom: 5px; transform: scaleY(1.15); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
+  .sub-title { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; color: var(--nosebleed-red); transform: scaleY(1.1); transform-origin: bottom; transition: opacity 0.6s var(--ease); pointer-events: auto; display: inline-block; }
   
   /* ==========================================
      FEATURED STORY BOX
      ========================================== */
   .featured-story-box {
     grid-column: 9 / 13;
-    grid-row: 9 / 12;
+    grid-row: 5 / 10;
     z-index: 30;
-    background-color: var(--bg-poster);
-    border: 4px solid var(--black);
-    padding: 20px;
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-self: end;
-    margin-bottom: 20px;
+    justify-content: center;
     transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
   }
 
@@ -166,22 +160,22 @@
     font-weight: 900;
     text-transform: uppercase;
     color: var(--nosebleed-red);
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     display: block;
   }
 
   .featured-story-box .story-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -0.5px;
     line-height: 1.1;
     color: var(--black);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 
   .featured-story-box .story-link {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 900;
     color: var(--black);
     text-decoration: none;
@@ -195,40 +189,74 @@
     transform: scaleY(1.2) translateX(3px);
   }
 
-  .canvas.shifted .featured-story-box {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px);
-  }
+  .canvas.shifted .featured-story-box { opacity: 0; pointer-events: none; transform: translateY(20px); }
 
   /* ==========================================
      DYNAMIC SECTIONS
      ========================================== */
-  .section-content { grid-column: 2 / 12; grid-row: 3 / 8; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s var(--ease); display: flex; flex-direction: column; justify-content: center; }
+  .section-content { grid-column: 2 / 8; grid-row: 3 / 9; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s var(--ease); display: flex; flex-direction: column; justify-content: center; }
   .section-content.active { opacity: 1; pointer-events: auto; }
-  .section-title { font-size: 55px; font-weight: 900; text-transform: uppercase; letter-spacing: -3px; margin-bottom: 20px; transform: scaleY(1.1); transform-origin: left; color: var(--nosebleed-red); display: inline-block; }
+  .section-title { font-size: 50px; font-weight: 900; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 20px; transform: scaleY(1.1); transform-origin: left; color: var(--nosebleed-red); display: inline-block; }
   
-  .writing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-  .category-group { border-top: 4px solid var(--nosebleed-red); padding-top: 10px; }
-  .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
-  .cat-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 10px; color: var(--black); }
+  .writing-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .category-group { border-top: 2px solid var(--nosebleed-red); padding-top: 10px; }
+  .cat-label { font-size: 10px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
+  .cat-title { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 5px; color: var(--black); }
   
-  .editorial-link { font-size: 13px; font-weight: 900; color: var(--black); text-decoration: none; text-transform: uppercase; display: block; padding: 5px 0; transition: transform 0.2s, color 0.2s; }
-  .editorial-link:hover { color: var(--pistachio); transform: scaleY(1.3) translateX(5px); transform-origin: top; }
+  .editorial-link { font-size: 12px; font-weight: 900; color: var(--black); text-decoration: none; text-transform: uppercase; display: block; padding: 3px 0; transition: transform 0.2s, color 0.2s; }
+  .editorial-link:hover { color: var(--pistachio); transform: scaleY(1.2) translateX(5px); transform-origin: top; }
   
-  .canvas.shifted .hero-drip { transform: scale(0.5) translateY(100px) translateX(300px); }
+  .canvas.shifted .hero-drip { transform: scale(0.5) translateY(100px) translateX(-100px); }
   .canvas.shifted .main-title, .canvas.shifted .sub-title { opacity: 0.03; }
-  .red-divider { border-top: 4px solid var(--nosebleed-red); margin-bottom: 20px; }
   
+  /* ==========================================
+     TICKER SYSTEM
+     ========================================== */
+  .ticker-bar {
+    width: 100%;
+    height: 35px;
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    border-top: 2px solid var(--black);
+  }
+
+  .ticker-content {
+    display: flex;
+    white-space: nowrap;
+    animation: tickerLoop 30s linear infinite;
+  }
+
+  .ticker-item {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--bg-poster);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-item::after {
+    content: '///';
+    color: var(--nosebleed-red);
+    margin-left: 40px;
+  }
+
+  @keyframes tickerLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   @media (max-width: 768px) { 
     .main-title { font-size: 55px; letter-spacing: -2px; } 
-    .sub-title { font-size: 22px; } 
-    .hero-drip-container { grid-column: 4 / 10; grid-row: 3 / 7; } 
-    .writing-grid { grid-template-columns: 1fr; } 
-    .global-header { padding: 15px 20px; }
-    .nav-links { gap: 15px; }
-    .section-content { grid-row: 3 / 9; } 
-    .featured-story-box { grid-column: 2 / 12; grid-row: 10 / 13; margin-bottom: 0; }
+    .canvas::before { display: none; }
+    .hero-drip-container { grid-column: 2 / 12; grid-row: 2 / 6; } 
+    .featured-story-box { grid-column: 2 / 12; grid-row: 6 / 10; padding: 10px 0; }
+    .section-content { grid-column: 2 / 12; grid-row: 2 / 10; }
   }
 </style>
 </head>
@@ -248,7 +276,6 @@
     <div class="geo-shard red-shard p2 drift-slow"></div>
     <div class="geo-shard green-shard p3 drift-slow"></div>
     <div class="geo-shard red-shard p4 drift-fast"></div>
-    <div class="geo-shard green-shard p5 drift-slow"></div>
     
     <div class="hero-drip-container">
       <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.jpeg');"></div>
@@ -268,10 +295,9 @@
     </div>
 
     <div class="section-content" id="page-about">
-      <div class="red-divider"></div>
       <div><h2 class="section-title">About</h2></div>
-      <div style="font-size: 24px; font-weight: 900; line-height: 1.3; max-width: 650px; letter-spacing: -0.5px;">
-        I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing, bridging the gap between grassroots triumphs and professional artistry.
+      <div style="font-size: 20px; font-weight: 900; line-height: 1.3; letter-spacing: -0.5px;">
+        I am a dedicated journalist studying for an NCTJ Diploma at the PA Media Academy in London. I specialize in real-time sports journalism, cultural analytics, and in-depth column writing.
       </div>
     </div>
 
@@ -288,47 +314,41 @@
           <h3 class="cat-title">Arts & Film</h3>
           <a href="cleo-from-5-to-7.html" class="editorial-link">Essay: Cléo from 5 to 7 →</a>
           <a href="colin-from-accounts.html" class="editorial-link">Review: Colin From Accounts →</a>
-          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" class="editorial-link">The Motive and the Cue Review →</a>
-          <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" class="editorial-link">Dancing at Lughnasa Review →</a>
         </div>
         <div class="category-group">
           <span class="cat-label">Section 03</span>
           <h3 class="cat-title">Book Critiques</h3>
           <a href="prophet-song.html" class="editorial-link">Review: Prophet Song →</a>
-          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: My Brilliant Friend →</a>
-          <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: Second Place →</a>
-        </div>
-        <div class="category-group">
-          <span class="cat-label">Section 04</span>
-          <h3 class="cat-title">Columns</h3>
-          <a href="https://impactnottingham.com/2018/03/acting-souljam-drunk-texting-grateful-another-month-life-freshers-columnist/" target="_blank" class="editorial-link">'Acting Souljam...' →</a>
-          <a href="https://impactnottingham.com/2018/01/fresh-year-freshers-columnist/" target="_blank" class="editorial-link">'Fresh Year' →</a>
         </div>
       </div>
     </div>
 
     <div class="section-content" id="page-contact">
-      <div class="red-divider"></div>
       <div><h2 class="section-title">Contact</h2></div>
-      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 36px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)';" onmouseout="this.style.color='var(--black)';">ronansullivan@hotmail.co.uk</a>
-      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 20px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)';" onmouseout="this.style.color='var(--black)';">View LinkedIn Profile →</a>
+      <a href="mailto:ronansullivan@hotmail.co.uk" style="font-size: 28px; font-weight: 900; color: var(--black); text-decoration: none; display: block; margin-bottom: 5px; letter-spacing: -1px; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)';" onmouseout="this.style.color='var(--black)';">ronansullivan@hotmail.co.uk</a>
+      <a href="https://www.linkedin.com/in/ronanmsullivan/" target="_blank" style="font-size: 16px; font-weight: 900; color: var(--black); text-decoration: none; display: inline-block; transition: transform 0.2s, color 0.2s;" onmouseover="this.style.color='var(--pistachio)';" onmouseout="this.style.color='var(--black)';">View LinkedIn Profile →</a>
+    </div>
+  </div>
+
+  <div class="ticker-bar">
+    <div class="ticker-content" id="ticker-slider">
+      <div class="ticker-item">PA Media Academy // London</div>
+      <div class="ticker-item" id="ticker-time">Updating feed...</div>
+      <div class="ticker-item">Open for freelance inquiries</div>
+      <div class="ticker-item">PA Media Academy // London</div>
+      <div class="ticker-item" id="ticker-time-dup">Updating feed...</div>
+      <div class="ticker-item">Open for freelance inquiries</div>
     </div>
   </div>
 
   <script>
-    // 1. POOL OF ARTICLES TO ROTATE BETWEEN
+    // 1. POOL OF ARTICLES
     const featuredArticles = [
       {
         label: "Sports Report",
         title: "Win over Welsh side secures Fenix Trophy play-off place",
         link: "https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/",
         cta: "Read Full Report →"
-      },
-      {
-        label: "Theatre Review",
-        title: "The Motive and the Cue at the National Theatre",
-        link: "https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html",
-        cta: "Read Review →"
       },
       {
         label: "Arts Column",
@@ -344,7 +364,6 @@
       }
     ];
 
-    // 2. RUN ROTATOR ON LOAD
     function setupFeaturedStory() {
       const randomIndex = Math.floor(Math.random() * featuredArticles.length);
       const chosen = featuredArticles[randomIndex];
@@ -353,6 +372,17 @@
       document.getElementById('featured-title').textContent = chosen.title;
       document.getElementById('featured-link').href = chosen.link;
       document.getElementById('featured-link').textContent = chosen.cta;
+    }
+
+    // 2. LIVE CLOCK FOR TICKER
+    function updateTickerTime() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).toUpperCase();
+      const fullStr = `${dateStr} // ${timeStr}`;
+      
+      document.getElementById('ticker-time').textContent = fullStr;
+      document.getElementById('ticker-time-dup').textContent = fullStr;
     }
 
     // 3. PAGE TRANSITIONS
@@ -377,7 +407,9 @@
     }
     
     window.onload = function() {
-      setupFeaturedStory(); // Trigger rotation
+      setupFeaturedStory();
+      updateTickerTime();
+      setInterval(updateTickerTime, 1000); // Ticker updates live every second
       
       const savedPage = localStorage.getItem('openPage');
       if (savedPage) { 
