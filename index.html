@@ -201,7 +201,7 @@
     letter-spacing: -7px;
     line-height: 0.75;
     text-transform: uppercase;
-    color: var(--black); /* 🛠️ Stays bold, heavy black */
+    color: var(--black);
     margin-bottom: 5px;
     transform: scaleY(1.15);
     transform-origin: bottom;
@@ -215,7 +215,7 @@
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -1px;
-    color: var(--nosebleed-red); /* 🛠️ UPDATED: Shifted from pistachio to red */
+    color: var(--nosebleed-red);
     margin-bottom: 20px;
     transform: scaleY(1.1);
     transform-origin: bottom;
@@ -246,12 +246,12 @@
   }
 
   .nav-item:hover {
-    color: var(--nosebleed-red);
+    color: var(--pistachio); /* 🛠️ UPDATED: Hovering makes text go green */
     transform: scaleY(1.4) translateY(5px); 
   }
 
   .nav-item.active-nav {
-    color: var(--nosebleed-red);
+    color: var(--nosebleed-red); /* 🛠️ Stays red when active to match the page titles */
     transform: scaleY(1.2);
     pointer-events: none; 
   }
@@ -282,7 +282,7 @@
     margin-bottom: 20px;
     transform: scaleY(1.1);
     transform-origin: left;
-    color: var(--nosebleed-red); /* 🛠️ UPDATED: All inner page headers are now red */
+    color: var(--nosebleed-red);
     display: inline-block;
   }
 
