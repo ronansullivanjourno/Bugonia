@@ -147,24 +147,44 @@
     opacity: var(--current-opacity);
     background-size: cover;
     background-position: center;
-    /* Massive custom non-uniform cut */
+    /* Custom non-uniform cut */
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%);
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
     pointer-events: auto;
     cursor: pointer;
+    
+    /* AGGRESSIVE DUOTONE VISUAL STYLE APPLICATION */
+    filter: 
+      grayscale(100%) /* 1. Convert to strict black & white */
+      contrast(250%)   /* 2. Heavy contrast push to make features pop */
+      sepia(100%)      /* 3. Base wash for coloring */
+      hue-rotate(-45deg) /* 4. Shift sepia toward Pistachio/Red axis */
+      brightness(105%); /* 5. Subtle bright pop */
   }
 
   .hero-drip:hover {
     transform: scale(1.05) rotate(-2deg);
   }
 
-  /* Force image into high contrast aesthetic */
+  /* OVERLAY FOR UNSETTLING BLEND */
   .hero-drip::after {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #fcebeb;
-    opacity: 0.2;
+    /* Layer 1: Sickly color bleed on shadows */
+    background-color: var(--pistachio);
+    opacity: 0.15;
+    mix-blend-mode: color-burn;
+  }
+  
+  .hero-drip::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+    /* Layer 2: Aggressive color wash on highlights */
+    background-color: var(--nosebleed-red);
+    opacity: 0.22;
     mix-blend-mode: overlay;
   }
 
@@ -244,9 +264,7 @@
     opacity: 1;
     pointer-events: auto;
   }
-<div class="hero-drip-container">
-      <div id="primary-blob" class="hero-drip" style="background-image: url('image_e31428.jpg');"></div>
-    </div>
+
   .section-title {
     font-size: 55px;
     font-weight: 900;
@@ -314,7 +332,7 @@
     <div class="geo-shard green-shard p5 drift-slow"></div>
 
     <div class="hero-drip-container">
-      <div id="primary-blob" class="hero-drip" style="background-image: url('hero-face.jpg');"></div>
+      <div id="primary-blob" class="hero-drip" style="background-image: url('image_0.png');"></div>
     </div>
 
     <div class="masthead">
