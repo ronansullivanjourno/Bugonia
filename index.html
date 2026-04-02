@@ -76,14 +76,12 @@
     border-radius: 50%;
     z-index: 1;
     pointer-events: none;
-    /* Smooth transition for when the opacity drops on navigation */
     transition: opacity 1.2s var(--ease);
   }
 
   .ltr { animation: driftRight 28s linear infinite, blobDeform 5s ease-in-out infinite alternate; }
   .rtl { animation: driftLeft 23s linear infinite, blobDeform 6s ease-in-out infinite alternate; }
 
-  /* Scattered starting points so the screen is immediately active */
   .p1 { width: 60px; height: 50px; top: 15%; left: 10%; animation-duration: 22s, 5s; }
   .p2 { width: 35px; height: 35px; top: 40%; left: 30%; animation-duration: 15s, 3.5s; }
   .p3 { width: 90px; height: 80px; top: 60%; left: 50%; animation-duration: 28s, 6s; }
@@ -106,23 +104,16 @@
     100% { transform: translateY(10px) rotate(15deg); border-radius: 60% 40% 30% 70%; }
   }
 
-  /* THE PRIMARY BLOB */
-  .hero-drip {
+  /* THE PRIMARY BLOB STRUCTURE */
+  .hero-drip-container {
     grid-column: 5 / 9;
     grid-row: 2 / 7;
-    background-color: var(--bruise-ink);
-    opacity: var(--current-opacity);
-    background-size: cover;
-    background-position: center;
     z-index: 10;
-    clip-path: url(#blob-mask);
-    transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
-    position: relative;
-    cursor: pointer;
-  }
-
-  /* Continuous gentle bobbing that won't disrupt layout shifting */
-  .hero-drip.animating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    /* This outer div handles the continuous float exclusively */
     animation: floatingPrimary 6s ease-in-out infinite;
   }
 
@@ -130,6 +121,20 @@
     0% { transform: translateY(0px) rotate(0deg); }
     50% { transform: translateY(-12px) rotate(2deg); }
     100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  .hero-drip {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bruise-ink);
+    opacity: var(--current-opacity);
+    background-size: cover;
+    background-position: center;
+    clip-path: url(#blob-mask);
+    /* This inner div handles the shrinking layout transitions exclusively */
+    transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
+    pointer-events: auto;
+    cursor: pointer;
   }
 
   /* Hover to make it swell like a pulse */
@@ -275,7 +280,7 @@
 
   @media (max-width: 768px) {
     .main-title { font-size: 65px; letter-spacing: -3px; }
-    .hero-drip { grid-column: 4 / 10; grid-row: 2 / 7; }
+    .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 7; }
     .writing-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -299,7 +304,9 @@
     <div class="ink-blob p5 ltr"></div>
     <div class="ink-blob p6 rtl"></div>
 
-    <div id="primary-blob" class="hero-drip animating" style="background-image: url('hero-face.jpg');"></div>
+    <div class="hero-drip-container">
+      <div id="primary-blob" class="hero-drip" style="background-image: url('hero-face.jpg');"></div>
+    </div>
 
     <div class="masthead">
       <h1 class="main-title">Ronan<br>Sullivan</h1>
@@ -361,10 +368,6 @@
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-nav'));
       
       const canvas = document.getElementById('main-canvas');
-      const primaryBlob = document.getElementById('primary-blob');
-
-      // Stop the bobbing animation before the transition to avoid jerky snaps
-      primaryBlob.classList.remove('animating');
 
       if (pageId === 'home') {
         canvas.classList.remove('shifted');
@@ -372,11 +375,6 @@
         
         // Return opacity to bold 0.65 on landing page
         document.documentElement.style.setProperty('--current-opacity', '0.65');
-        
-        // Re-enable floating animation after the smooth shift finishes
-        setTimeout(() => {
-          primaryBlob.classList.add('animating');
-        }, 1200);
       } else {
         canvas.classList.add('shifted');
         document.getElementById('nav-' + pageId).classList.add('active-nav');
