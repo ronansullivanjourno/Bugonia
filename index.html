@@ -46,18 +46,18 @@
 
   /* CANVAS */
   .canvas {
-    width: 92vw;
-    max-width: 1100px;
-    height: 85vh;
+    /* 🛠️ EXPANDED: Canvas is now much larger on the screen */
+    width: 96vw;
+    max-width: 1400px; /* Bumped up from 1100px to allow it to spread on big monitors */
+    height: 92vh;
     position: relative;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
     background-color: var(--bg-poster);
     overflow: hidden; 
-    
-    /* 🛠️ ADDED: Heavy left border frame in Nosebleed-Red */
     border-left: 8px solid var(--nosebleed-red);
+    padding-left: 40px;
   }
 
   /* ATMOSPHERIC DUO-TONE BLEED */
@@ -112,11 +112,11 @@
 
   @keyframes driftRight {
     0% { transform: translateX(-200px); }
-    100% { transform: translateX(calc(92vw + 200px)); }
+    100% { transform: translateX(calc(96vw + 200px)); }
   }
 
   @keyframes driftLeft {
-    0% { transform: translateX(calc(92vw + 200px)); }
+    0% { transform: translateX(calc(96vw + 200px)); }
     100% { transform: translateX(-200px); }
   }
 
@@ -127,7 +127,7 @@
 
   /* THE PRIMARY SPECIMEN SHAPE */
   .hero-drip-container {
-    grid-column: 5 / 9;
+    grid-column: 6 / 10; /* Shifted slightly to account for wider canvas */
     grid-row: 2 / 7;
     z-index: 10;
     display: flex;
@@ -256,13 +256,11 @@
     display: inline-block;
   }
 
-  /* HOVER INTERACTION LOCKED TO DARK NOSEBLEED RED */
   .nav-item:hover {
     color: var(--nosebleed-red);
     transform: scaleY(1.4) translateY(5px); 
   }
 
-  /* ACTIVE STATE COLORS (NO UNDERLINE ON HOME) */
   .nav-item.active-nav {
     color: var(--nosebleed-red);
     transform: scaleY(1.2);
@@ -312,7 +310,6 @@
   }
 
   .category-group {
-    /* 🛠️ UPDATED: Thicker, Nosebleed-Red divider for Writing caps */
     border-top: 4px solid var(--nosebleed-red);
     padding-top: 10px;
   }
@@ -345,7 +342,7 @@
 
   /* DYNAMIC CANVAS STATE */
   .canvas.shifted .hero-drip {
-    transform: scale(0.5) translateY(140px) translateX(240px);
+    transform: scale(0.5) translateY(140px) translateX(300px); /* Pushed out a bit more for wider grid */
   }
 
   .canvas.shifted .main-title,
@@ -353,7 +350,6 @@
     opacity: 0.03;
   }
   
-  /* 🛠️ ADDED: Heavy Red top-bar dividers for About/Contact flow */
   .red-divider {
     border-top: 4px solid var(--nosebleed-red);
     margin-bottom: 20px;
@@ -364,7 +360,7 @@
     .sub-title { font-size: 22px; }
     .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 6; }
     .writing-grid { grid-template-columns: 1fr; }
-    .canvas { border-left-width: 4px; } /* Thinner border on mobile */
+    .canvas { border-left-width: 4px; padding-left: 20px; width: 96vw; height: 92vh; } 
   }
 </style>
 </head>
