@@ -11,10 +11,12 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-poster: #e5dec9; /* A sterile, clinical, slightly sickly paper tone */
+    --bg-poster: #e0d9c1; /* Sickly, clinical paper stock */
     --black: #0d0d0d;
+    --bruise-ink: #2b1216; /* Deep, atmospheric claret instead of flat black */
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
+    --blob-opacity: 0.22; /* Strictly enforced uniform opacity */
   }
 
   body {
@@ -33,7 +35,7 @@
     content: '';
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.35;
+    opacity: 0.4;
     pointer-events: none;
     z-index: 50;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -52,18 +54,30 @@
     overflow: hidden; 
   }
 
-  /* UNIFIED FLOATING INK BLOBS (Drifting continuously across) */
+  /* INVENTIVE ATMOSPHERIC BLEED (Lanthimos's high-contrast surrealism) */
+  .canvas::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(to bottom, #741b28 0%, transparent 20%, transparent 80%, #5c553a 100%);
+    opacity: 0.12;
+    mix-blend-mode: color-burn;
+  }
+
+  /* UNIFIED FLOATING INK BLOBS */
   .ink-blob {
     position: absolute;
-    background-color: var(--black);
-    opacity: 0.15; /* All exactly the same color and boldness */
+    background-color: var(--bruise-ink);
+    opacity: var(--blob-opacity);
     border-radius: 50%;
     z-index: 1;
     pointer-events: none;
   }
 
-  .ltr { animation: driftRight 25s linear infinite, blobDeform 4s ease-in-out infinite alternate; }
-  .rtl { animation: driftLeft 20s linear infinite, blobDeform 5s ease-in-out infinite alternate; }
+  .ltr { animation: driftRight 28s linear infinite, blobDeform 5s ease-in-out infinite alternate; }
+  .rtl { animation: driftLeft 23s linear infinite, blobDeform 6s ease-in-out infinite alternate; }
 
   /* Scattered starting points so the screen is immediately active */
   .p1 { width: 60px; height: 50px; top: 15%; left: 10%; animation-duration: 22s, 5s; }
@@ -83,42 +97,51 @@
     100% { transform: translateX(-150px); }
   }
 
-  /* Giving the background blobs that classic organic warping movement */
   @keyframes blobDeform {
     0% { transform: translateY(-10px) rotate(0deg); border-radius: 40% 60% 70% 30%; }
     100% { transform: translateY(10px) rotate(15deg); border-radius: 60% 40% 30% 70%; }
   }
 
-  /* THE PRIMARY BLOB (Shrunk down and given active physics) */
+  /* THE PRIMARY BLOB (Fixed the jerky transition and enforced uniform opacity) */
   .hero-drip {
-    grid-column: 5 / 9; /* Centered and smaller */
+    grid-column: 5 / 9;
     grid-row: 2 / 7;
-    background-color: var(--black);
+    background-color: var(--bruise-ink);
+    opacity: var(--blob-opacity);
     background-size: cover;
     background-position: center;
     z-index: 10;
     clip-path: url(#blob-mask);
+    /* Strict transition on transform to keep it silky smooth on page changes */
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
     position: relative;
-    
-    /* Movable effect: Continuous floating physics */
+    cursor: pointer;
+  }
+
+  /* Continuous gentle bobbing that won't disrupt layout shifting */
+  .hero-drip.animating {
     animation: floatingPrimary 6s ease-in-out infinite;
   }
 
   @keyframes floatingPrimary {
     0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(3deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
     100% { transform: translateY(0px) rotate(0deg); }
   }
 
-  /* Overlay to make the image blend with Lanthimos's high-contrast look */
+  /* Hover to make it swell like a pulse */
+  .hero-drip:hover {
+    transform: scale(1.08);
+  }
+
+  /* Overlay that forces the image into high contrast Lanthimos aesthetic */
   .hero-drip::after {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: var(--bg-poster);
-    opacity: 0.25;
-    mix-blend-mode: color-burn;
+    background-color: #fcebeb;
+    opacity: 0.15;
+    mix-blend-mode: overlay;
   }
 
   /* AGGRESSIVE TITLES & PERSISTENT NAV */
@@ -238,11 +261,10 @@
     transform-origin: top;
   }
 
-  /* DYNAMIC CANVAS STATE */
+  /* DYNAMIC CANVAS STATE: Flawless layout shift when active */
   .canvas.shifted .hero-drip {
-    transform: scale(0.6) translateY(100px) translateX(200px);
-    opacity: 0.1;
-    animation: none; /* Stops moving to let text be readable */
+    transform: scale(0.6) translateY(120px) translateX(220px);
+    opacity: 0.05; /* Fades down slightly to allow text readability */
   }
 
   .canvas.shifted .main-title {
@@ -275,7 +297,7 @@
     <div class="ink-blob p5 ltr"></div>
     <div class="ink-blob p6 rtl"></div>
 
-    <div class="hero-drip" style="background-image: url('hero-face.jpg');"></div>
+    <div id="primary-blob" class="hero-drip animating" style="background-image: url('hero-face.jpg');"></div>
 
     <div class="masthead">
       <h1 class="main-title">Ronan<br>Sullivan</h1>
@@ -337,10 +359,19 @@
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-nav'));
       
       const canvas = document.getElementById('main-canvas');
+      const primaryBlob = document.getElementById('primary-blob');
+
+      // Stop the bobbing animation before the transition to avoid jerky snaps
+      primaryBlob.classList.remove('animating');
 
       if (pageId === 'home') {
         canvas.classList.remove('shifted');
         document.getElementById('nav-home').classList.add('active-nav');
+        
+        // Re-enable floating animation after the smooth shift finishes
+        setTimeout(() => {
+          primaryBlob.classList.add('animating');
+        }, 1200);
       } else {
         canvas.classList.add('shifted');
         document.getElementById('nav-' + pageId).classList.add('active-nav');
