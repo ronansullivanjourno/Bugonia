@@ -146,20 +146,22 @@
     background-color: var(--nosebleed-red);
     opacity: var(--current-opacity);
     background-size: cover;
-    background-position: center;
-    /* Custom non-uniform cut */
+    
+    /* PUSH CROP LOWER TO CENTER ON YOUR FACE */
+    background-position: center 30%; 
+    
     clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%);
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
     pointer-events: auto;
     cursor: pointer;
     
-    /* AGGRESSIVE DUOTONE VISUAL STYLE APPLICATION */
+    /* RESTORE RICH COLORS AND DEEPEN CONTRAST */
     filter: 
-      grayscale(100%) /* 1. Convert to strict black & white */
-      contrast(220%)   /* 2. Heavy contrast push to make features pop */
-      sepia(100%)      /* 3. Base wash for coloring */
-      hue-rotate(-45deg) /* 4. Shift sepia toward Pistachio/Red axis */
-      brightness(105%); /* 5. Subtle bright pop */
+      grayscale(100%) 
+      contrast(280%)   
+      sepia(100%)      
+      hue-rotate(-48deg) 
+      brightness(95%);  
   }
 
   .hero-drip:hover {
