@@ -13,7 +13,10 @@
   :root {
     --bg-poster: #bcc6cc; /* Cold, clinical glaucous blue-gray */
     --black: #0d0d0d;
-    --pistachio: #93a27f; /* Sickly, institutional green */
+    
+    /* 🛠️ OVERHAULED PISTACHIO FOR READABILITY - DEEPER, RICHER, UNIFORM */
+    --pistachio: #5b6e56; /* Cinematic, deep slate-green */
+    
     --nosebleed-red: #7c2230; /* Cinematic deep red */
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
@@ -69,7 +72,7 @@
     mix-blend-mode: multiply;
   }
 
-  /* NON-UNIFORM ANGULAR FLOATING SHARDS */
+  /* NON-UNIFORM ANGULAR FLOATING SHARDS (Synced with new dark green) */
   .geo-shard {
     position: absolute;
     opacity: var(--current-opacity);
@@ -195,14 +198,14 @@
     pointer-events: none; 
   }
 
-  /* HEADINGS TO NOSEBLEED RED */
+  /* 🛠️ RESTORED HEADINGS TO SOLID HEAVY BLACK */
   .main-title {
     font-size: 110px;
     font-weight: 900;
     letter-spacing: -7px;
     line-height: 0.75;
     text-transform: uppercase;
-    color: var(--nosebleed-red);
+    color: var(--black);
     margin-bottom: 5px;
     transform: scaleY(1.15);
     transform-origin: bottom;
@@ -215,7 +218,7 @@
     transform: scaleY(1.2) scaleX(1.02);
   }
 
-  /* SUB-HEADING TO PISTACHIO */
+  /* SUB-HEADING REMAINS PISTACHIO GREEN (Updated) */
   .sub-title {
     font-size: 32px;
     font-weight: 900;
@@ -286,7 +289,7 @@
     pointer-events: auto;
   }
 
-  /* SECTION TITLES TO NOSEBLEED RED */
+  /* 🛠️ RESTORED SECTION TITLES TO HEAVY BLACK */
   .section-title {
     font-size: 55px;
     font-weight: 900;
@@ -295,7 +298,7 @@
     margin-bottom: 20px;
     transform: scaleY(1.1);
     transform-origin: left;
-    color: var(--nosebleed-red);
+    color: var(--black);
     transition: transform 0.3s var(--ease);
     display: inline-block;
   }
@@ -318,7 +321,7 @@
 
   .cat-label { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.5; }
   
-  /* 🛠️ APPLIED PISTACHIO TO SUB-HEADINGS ON OTHER PAGES */
+  /* SUB-HEADINGS AUTOMATICALLY USE UPDATED LEGIBLE GREEN */
   .cat-title { 
     font-size: 24px; 
     font-weight: 900; 
