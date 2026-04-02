@@ -267,11 +267,26 @@
       }
     }
     
-    window.onload = function() {
-      const savedPage = localStorage.getItem('openPage');
-      if (savedPage) { 
-        openPage(savedPage); 
-        localStorage.removeItem('openPage'); 
+window.onload = function() {
+  setupFeaturedStory();
+  
+  // 1. Read the parameters from the URL bar
+  const urlParams = new URLSearchParams(window.location.search);
+  const requestedPage = urlParams.get('page');
+  const requestedState = urlParams.get('state');
+  
+  // 2. If the URL asks for 'writing', automatically fire that tab
+  if (requestedPage === 'writing') {
+    openPage('writing');
+  } else if (requestedPage) {
+    openPage(requestedPage);
+  }
+  
+  // 3. If it asks to shift the background, apply the class
+  if (requestedState === 'shifted') {
+    document.documentElement.classList.add('preload-shifted');
+  }
+};
       } 
     };
   </script>
