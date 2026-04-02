@@ -11,9 +11,10 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg-poster: #e0d9c1; /* Sickly, clinical paper stock */
+    --bg-poster: #bcc6cc; /* Cold, clinical glaucous blue-gray */
     --black: #0d0d0d;
-    --bruise-ink: #2b1216; /* Deep, atmospheric claret instead of flat black */
+    --pistachio: #93a27f; /* Sickly, institutional green */
+    --nosebleed-red: #7c2230; /* Cinematic deep red */
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
     
@@ -37,7 +38,7 @@
     content: '';
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.4;
+    opacity: 0.5;
     pointer-events: none;
     z-index: 50;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -56,55 +57,72 @@
     overflow: hidden; 
   }
 
-  /* INVENTIVE ATMOSPHERIC BLEED */
+  /* ATMOSPHERIC DUO-TONE BLEED */
   .canvas::after {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none;
     z-index: 2;
-    background: linear-gradient(to bottom, #741b28 0%, transparent 20%, transparent 80%, #5c553a 100%);
-    opacity: 0.12;
-    mix-blend-mode: color-burn;
+    background: linear-gradient(135deg, var(--pistachio) 0%, transparent 40%, transparent 60%, var(--nosebleed-red) 100%);
+    opacity: 0.18;
+    mix-blend-mode: multiply;
   }
 
-  /* UNIFIED FLOATING INK BLOBS */
-  .ink-blob {
+  /* NON-UNIFORM ANGULAR FLOATING SHARDS */
+  .geo-shard {
     position: absolute;
-    background-color: var(--bruise-ink);
     opacity: var(--current-opacity);
-    border-radius: 50%;
     z-index: 1;
     pointer-events: none;
     transition: opacity 1.2s var(--ease);
   }
 
-  .ltr { animation: driftRight 28s linear infinite, blobDeform 5s ease-in-out infinite alternate; }
-  .rtl { animation: driftLeft 23s linear infinite, blobDeform 6s ease-in-out infinite alternate; }
+  .green-shard { background-color: var(--pistachio); }
+  .red-shard { background-color: var(--nosebleed-red); }
 
-  .p1 { width: 60px; height: 50px; top: 15%; left: 10%; animation-duration: 22s, 5s; }
-  .p2 { width: 35px; height: 35px; top: 40%; left: 30%; animation-duration: 15s, 3.5s; }
-  .p3 { width: 90px; height: 80px; top: 60%; left: 50%; animation-duration: 28s, 6s; }
-  .p4 { width: 25px; height: 25px; top: 80%; left: 70%; animation-duration: 12s, 4s; }
-  .p5 { width: 110px; height: 100px; top: 5%; left: 85%; animation-duration: 32s, 7s; }
-  .p6 { width: 40px; height: 40px; top: 25%; left: 20%; animation-duration: 18s, 4.5s; }
+  /* Continuous non-uniform rotation and drifting */
+  .drift-fast { animation: driftRight 18s linear infinite, spinShard 20s linear infinite; }
+  .drift-slow { animation: driftLeft 30s linear infinite, spinShard 35s linear infinite reverse; }
+
+  /* Pure CSS Polygons for highly non-uniform shapes */
+  .p1 { 
+    width: 120px; height: 100px; top: 10%; left: 5%; 
+    clip-path: polygon(20% 0%, 100% 20%, 70% 90%, 0% 80%);
+  }
+  .p2 { 
+    width: 60px; height: 60px; top: 35%; left: 25%; 
+    clip-path: polygon(50% 0%, 100% 100%, 0% 60%);
+  }
+  .p3 { 
+    width: 150px; height: 130px; top: 65%; left: 45%; 
+    clip-path: polygon(0 0, 100% 30%, 85% 100%, 10% 85%);
+  }
+  .p4 { 
+    width: 40px; height: 50px; top: 75%; left: 80%; 
+    clip-path: polygon(10% 10%, 90% 20%, 100% 90%, 20% 100%);
+  }
+  .p5 { 
+    width: 180px; height: 140px; top: 5%; left: 75%; 
+    clip-path: polygon(30% 0%, 90% 10%, 100% 70%, 0% 100%);
+  }
 
   @keyframes driftRight {
-    0% { transform: translateX(-150px); }
-    100% { transform: translateX(calc(92vw + 150px)); }
+    0% { transform: translateX(-200px); }
+    100% { transform: translateX(calc(92vw + 200px)); }
   }
 
   @keyframes driftLeft {
-    0% { transform: translateX(calc(92vw + 150px)); }
-    100% { transform: translateX(-150px); }
+    0% { transform: translateX(calc(92vw + 200px)); }
+    100% { transform: translateX(-200px); }
   }
 
-  @keyframes blobDeform {
-    0% { transform: translateY(-10px) rotate(0deg); border-radius: 40% 60% 70% 30%; }
-    100% { transform: translateY(10px) rotate(15deg); border-radius: 60% 40% 30% 70%; }
+  @keyframes spinShard {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
-  /* THE PRIMARY BLOB STRUCTURE */
+  /* THE PRIMARY SPECIMEN SHAPE */
   .hero-drip-container {
     grid-column: 5 / 9;
     grid-row: 2 / 7;
@@ -113,46 +131,44 @@
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    /* This outer div handles the continuous float exclusively */
-    animation: floatingPrimary 6s ease-in-out infinite;
+    animation: floatingPrimary 8s ease-in-out infinite;
   }
 
   @keyframes floatingPrimary {
     0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-12px) rotate(2deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
     100% { transform: translateY(0px) rotate(0deg); }
   }
 
   .hero-drip {
     width: 100%;
     height: 100%;
-    background-color: var(--bruise-ink);
+    background-color: var(--nosebleed-red);
     opacity: var(--current-opacity);
     background-size: cover;
     background-position: center;
-    clip-path: url(#blob-mask);
-    /* This inner div handles the shrinking layout transitions exclusively */
+    /* Massive custom non-uniform cut */
+    clip-path: polygon(10% 5%, 95% 0%, 85% 90%, 5% 100%);
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
     pointer-events: auto;
     cursor: pointer;
   }
 
-  /* Hover to make it swell like a pulse */
   .hero-drip:hover {
-    transform: scale(1.08);
+    transform: scale(1.05) rotate(-2deg);
   }
 
-  /* Overlay that forces the image into high contrast Lanthimos aesthetic */
+  /* Force image into high contrast Lanthimos aesthetic */
   .hero-drip::after {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background-color: #fcebeb;
-    opacity: 0.15;
+    opacity: 0.2;
     mix-blend-mode: overlay;
   }
 
-  /* AGGRESSIVE TITLES & PERSISTENT NAV */
+  /* TITLES & NAV */
   .masthead {
     grid-column: 1 / 13;
     grid-row: 8 / 13;
@@ -271,11 +287,11 @@
 
   /* DYNAMIC CANVAS STATE */
   .canvas.shifted .hero-drip {
-    transform: scale(0.6) translateY(120px) translateX(220px);
+    transform: scale(0.5) translateY(140px) translateX(240px);
   }
 
   .canvas.shifted .main-title {
-    opacity: 0.05;
+    opacity: 0.03;
   }
 
   @media (max-width: 768px) {
@@ -287,22 +303,13 @@
 </head>
 <body>
 
-  <svg style="position: absolute; width: 0; height: 0;">
-    <defs>
-      <clipPath id="blob-mask" clipPathUnits="objectBoundingBox">
-        <path d="M 0.2,0.1 C 0.5,-0.1 0.85,0.0 0.95,0.3 C 1.05,0.6 0.9,0.85 0.65,0.95 C 0.4,1.05 0.15,0.85 0.05,0.6 C -0.05,0.35 0.05,0.2 0.2,0.1 Z" />
-      </clipPath>
-    </defs>
-  </svg>
-
   <div class="canvas" id="main-canvas">
     
-    <div class="ink-blob p1 ltr"></div>
-    <div class="ink-blob p2 rtl"></div>
-    <div class="ink-blob p3 ltr"></div>
-    <div class="ink-blob p4 rtl"></div>
-    <div class="ink-blob p5 ltr"></div>
-    <div class="ink-blob p6 rtl"></div>
+    <div class="geo-shard green-shard p1 drift-fast"></div>
+    <div class="geo-shard red-shard p2 drift-slow"></div>
+    <div class="geo-shard green-shard p3 drift-slow"></div>
+    <div class="geo-shard red-shard p4 drift-fast"></div>
+    <div class="geo-shard green-shard p5 drift-slow"></div>
 
     <div class="hero-drip-container">
       <div id="primary-blob" class="hero-drip" style="background-image: url('hero-face.jpg');"></div>
@@ -380,7 +387,7 @@
         document.getElementById('nav-' + pageId).classList.add('active-nav');
         document.getElementById('page-' + pageId).classList.add('active');
         
-        // Fade the background blobs down to 0.08 to make text highly readable
+        // Fade the background shards down to 0.08 to make text highly readable
         document.documentElement.style.setProperty('--current-opacity', '0.08');
       }
     }
