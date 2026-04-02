@@ -46,9 +46,8 @@
 
   /* CANVAS */
   .canvas {
-    /* 🛠️ EXPANDED: Canvas is now much larger on the screen */
     width: 96vw;
-    max-width: 1400px; /* Bumped up from 1100px to allow it to spread on big monitors */
+    max-width: 1400px;
     height: 92vh;
     position: relative;
     display: grid;
@@ -56,7 +55,9 @@
     grid-template-rows: repeat(12, 1fr);
     background-color: var(--bg-poster);
     overflow: hidden; 
-    border-left: 8px solid var(--nosebleed-red);
+    
+    /* 🛠️ UPDATED: Shifted from a heavy 8px border to a razor-thin trim */
+    border-left: 1.5px solid var(--nosebleed-red);
     padding-left: 40px;
   }
 
@@ -127,7 +128,7 @@
 
   /* THE PRIMARY SPECIMEN SHAPE */
   .hero-drip-container {
-    grid-column: 6 / 10; /* Shifted slightly to account for wider canvas */
+    grid-column: 6 / 10;
     grid-row: 2 / 7;
     z-index: 10;
     display: flex;
@@ -342,7 +343,7 @@
 
   /* DYNAMIC CANVAS STATE */
   .canvas.shifted .hero-drip {
-    transform: scale(0.5) translateY(140px) translateX(300px); /* Pushed out a bit more for wider grid */
+    transform: scale(0.5) translateY(140px) translateX(300px);
   }
 
   .canvas.shifted .main-title,
@@ -360,7 +361,7 @@
     .sub-title { font-size: 22px; }
     .hero-drip-container { grid-column: 4 / 10; grid-row: 2 / 6; }
     .writing-grid { grid-template-columns: 1fr; }
-    .canvas { border-left-width: 4px; padding-left: 20px; width: 96vw; height: 92vh; } 
+    .canvas { border-left-width: 1.5px; padding-left: 20px; width: 96vw; height: 92vh; } 
   }
 </style>
 </head>
