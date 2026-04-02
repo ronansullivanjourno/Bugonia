@@ -306,7 +306,7 @@
     text-transform: uppercase; 
     letter-spacing: -1px; 
     margin-bottom: 10px; 
-    color: var(--black); /* 🛠️ UPDATED: Shifted from green to black */
+    color: var(--black); 
   }
   
   .editorial-link {
@@ -390,18 +390,22 @@
           <h3 class="cat-title">Live Sports</h3>
           <a href="https://enfielddispatch.co.uk/win-over-welsh-side-will-go-long-way-to-securing-enfield-towns-fenix-trophy-play-off-place/" target="_blank" class="editorial-link">View Fenix Trophy Coverage →</a>
         </div>
+        
         <div class="category-group">
           <span class="cat-label">Section 02</span>
-          <h3 class="cat-title">Theatre & Arts</h3>
+          <h3 class="cat-title">Arts & Film</h3>
+          <a href="cleo-from-5-to-7.html" class="editorial-link">Essay: Cléo from 5 to 7 →</a>
           <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-review-motive-and-cue.html" target="_blank" class="editorial-link">The Motive and the Cue Review →</a>
           <a href="https://ronanswriting.blogspot.com/2023/05/national-theatre-dancing-at-lughnasa.html" target="_blank" class="editorial-link">Dancing at Lughnasa Review →</a>
         </div>
+
         <div class="category-group">
           <span class="cat-label">Section 03</span>
           <h3 class="cat-title">Book Critiques</h3>
           <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: My Brilliant Friend →</a>
           <a href="https://ronanswriting.blogspot.com/2022/12/book-review-wednesday-second-place-by.html" target="_blank" class="editorial-link">Review: Second Place →</a>
         </div>
+
         <div class="category-group">
           <span class="cat-label">Section 04</span>
           <h3 class="cat-title">Columns</h3>
@@ -439,7 +443,14 @@
       }
     }
 
-    document.getElementById('nav-home').classList.add('active-nav');
+    // 🛠️ State tracker so pushing "back" takes the viewer back to the open Writing state
+    const savedPage = localStorage.getItem('openPage');
+    if (savedPage) {
+      openPage(savedPage);
+      localStorage.removeItem('openPage'); 
+    } else {
+      document.getElementById('nav-home').classList.add('active-nav');
+    }
   </script>
 </body>
 </html>
