@@ -16,7 +16,9 @@
     --bruise-ink: #2b1216; /* Deep, atmospheric claret instead of flat black */
     --font: 'Archivo', sans-serif;
     --ease: cubic-bezier(0.77, 0, 0.175, 1);
-    --blob-opacity: 0.22; /* Strictly enforced uniform opacity */
+    
+    /* Dynamic opacity variables controlled via JS */
+    --current-opacity: 0.65; 
   }
 
   body {
@@ -54,7 +56,7 @@
     overflow: hidden; 
   }
 
-  /* INVENTIVE ATMOSPHERIC BLEED (Lanthimos's high-contrast surrealism) */
+  /* INVENTIVE ATMOSPHERIC BLEED */
   .canvas::after {
     content: '';
     position: absolute;
@@ -70,10 +72,12 @@
   .ink-blob {
     position: absolute;
     background-color: var(--bruise-ink);
-    opacity: var(--blob-opacity);
+    opacity: var(--current-opacity);
     border-radius: 50%;
     z-index: 1;
     pointer-events: none;
+    /* Smooth transition for when the opacity drops on navigation */
+    transition: opacity 1.2s var(--ease);
   }
 
   .ltr { animation: driftRight 28s linear infinite, blobDeform 5s ease-in-out infinite alternate; }
@@ -102,17 +106,16 @@
     100% { transform: translateY(10px) rotate(15deg); border-radius: 60% 40% 30% 70%; }
   }
 
-  /* THE PRIMARY BLOB (Fixed the jerky transition and enforced uniform opacity) */
+  /* THE PRIMARY BLOB */
   .hero-drip {
     grid-column: 5 / 9;
     grid-row: 2 / 7;
     background-color: var(--bruise-ink);
-    opacity: var(--blob-opacity);
+    opacity: var(--current-opacity);
     background-size: cover;
     background-position: center;
     z-index: 10;
     clip-path: url(#blob-mask);
-    /* Strict transition on transform to keep it silky smooth on page changes */
     transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
     position: relative;
     cursor: pointer;
@@ -261,10 +264,9 @@
     transform-origin: top;
   }
 
-  /* DYNAMIC CANVAS STATE: Flawless layout shift when active */
+  /* DYNAMIC CANVAS STATE */
   .canvas.shifted .hero-drip {
     transform: scale(0.6) translateY(120px) translateX(220px);
-    opacity: 0.05; /* Fades down slightly to allow text readability */
   }
 
   .canvas.shifted .main-title {
@@ -368,6 +370,9 @@
         canvas.classList.remove('shifted');
         document.getElementById('nav-home').classList.add('active-nav');
         
+        // Return opacity to bold 0.65 on landing page
+        document.documentElement.style.setProperty('--current-opacity', '0.65');
+        
         // Re-enable floating animation after the smooth shift finishes
         setTimeout(() => {
           primaryBlob.classList.add('animating');
@@ -376,6 +381,9 @@
         canvas.classList.add('shifted');
         document.getElementById('nav-' + pageId).classList.add('active-nav');
         document.getElementById('page-' + pageId).classList.add('active');
+        
+        // Fade the background blobs down to 0.08 to make text highly readable
+        document.documentElement.style.setProperty('--current-opacity', '0.08');
       }
     }
 
